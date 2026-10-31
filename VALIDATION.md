@@ -92,3 +92,7 @@ Baseline: `f6b227103bf3c2372fc8ac7c4f10dd109ef11f44`. Alcance: navegación de es
 - Preservación: modelo, tokens, cinco assets, dependencias/lockfile, base, workflow y pruebas anteriores sin cambios. iOS: HEAD, estado Git y hashes de 1,231 archivos idénticos al inicio; sin builds/tests nativos.
 
 El estado y la preferencia son locales a cada navegador, sin sincronización. La verificación remota del despliegue y la consola directa se entrega después de publicar el commit final. Los avisos del inspector en iframes, ya documentados en V2.1.1, se separan de la app directa.
+
+## V2.3A.1 · compact creation
+
+33/33 automated tests and both static builds pass. Browser review covers the three scripted proposals at 390/1440, EN/ES and Light/Dark, with focused editing, scheduling, cancellation, reload/persistence and keyboard checks. See [current evidence and limits](CREATION_V23A1.md) and [interaction regression checklist](tests/creation-interactions.md). This web pass is distinct from iOS/backend regression or production certification. Owner visual acceptance remains pending.

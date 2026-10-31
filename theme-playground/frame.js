@@ -28,7 +28,7 @@ window.addEventListener('message',event=>{
 if(settings.screen==='miles'){
  let started=false;
  const observer=new MutationObserver(()=>{
-  const skip=[...document.querySelectorAll('.clarification button')].find(el=>['Omitir detalles desconocidos','Skip unknown details'].includes(el.textContent.trim()));
+  const skip=[...document.querySelectorAll('.clarification button, .compact-clarification button')].find(el=>['Omitir detalles desconocidos','Skip unknown details'].includes(el.textContent.trim()));
   if(started&&skip){observer.disconnect();skip.click();requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,0)));return}
   const button=[...document.querySelectorAll('.conversation button')].find(el=>['Aprender francés','Learn French'].includes(el.textContent.trim()));
   if(button&&!started){started=true;button.click()}

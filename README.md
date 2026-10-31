@@ -75,4 +75,8 @@ El contenido utiliza el mismo ancho de barra para su margen y se reajusta de for
 
 ## Vision V2.3A · Miles-first creation
 
-M+ ofrece tres guiones locales declarados (Japón, francés y dentista), propuestas editables y confirmación explícita. La alternativa manual permanece visible. Los nuevos planes no exigen una meta numérica; las actividades sin fecha no aparecen en Today. Un recordatorio simple no crea proyecto. Los datos anteriores y su clave local se conservan. Véase [cambios, compatibilidad y validación](CREATION_V23A.md). Pendiente de aceptación UX; no hay IA o servicios reales.
+M+ ofrece tres guiones locales declarados (Japón, francés y dentista), propuestas editables y confirmación explícita. La alternativa manual permanece visible. Los nuevos planes no exigen una meta numérica; las actividades sin fecha no aparecen en Today. Un recordatorio simple no crea proyecto. Los datos anteriores y su clave local se conservan. Véase [cambios, compatibilidad y validación](CREATION_V23A.md). Comportamiento funcional aceptado por el propietario; no hay IA o servicios reales.
+
+## Vision V2.3A.1 · creación conversacional compacta
+
+Un único compositor, propuestas en modo resumen y edición contextual sustituyen los formularios siempre visibles. Japón, francés y dentista conservan confirmación explícita y las mismas reglas de datos. Los detalles confirmados reutilizan las listas compactas. B1 es una sugerencia descriptiva; las ideas de agenda siguen sin programar. Véase [cambios, pruebas y límites de revisión](CREATION_V23A1.md). Publicación de preview para revisión visual del propietario; no implica aceptación final.

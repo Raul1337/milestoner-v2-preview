@@ -1,6 +1,6 @@
 # Vision V2.3A — Miles-first creation
 
-Owner UX acceptance pending. Existing web prototype only; no native/backend/domain contract changes.
+Historical V2.3A validation below. The owner has since accepted its functional baseline, including descriptive B1 and unscheduled calendar suggestions. Presentation is refined in [V2.3A.1](CREATION_V23A1.md), pending visual acceptance. Existing web prototype only; no native/backend/domain contract changes.
 
 ## Reuse and resulting behavior
 
