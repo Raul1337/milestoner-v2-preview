@@ -3,13 +3,13 @@ import {X} from 'lucide-react';
 import {MPlus} from './Navigation';
 import {useLanguage} from './language';
 import {OverlayContext} from './OverlayContext';
-export default function MilesOverlay({onClose,guard,children}){
+export default function MilesOverlay({onClose,guard,children,returnFocus}){
  const {language}=useLanguage(),L=(es,en)=>language==='en'?en:es;
  const ref=useRef(),id=useId(),dirty=useRef(false),confirmAction=useRef(),returnTo=useRef(),[confirm,setConfirm]=useState(false),[footer,setFooter]=useState(null);
  const requestDiscard=useCallback((action,force=false)=>{if(dirty.current||force){returnTo.current=document.activeElement;confirmAction.current=action;setConfirm(true)}else action()},[]);
  useEffect(()=>{guard.current=action=>requestDiscard(action);return()=>{guard.current=action=>action()}},[guard,requestDiscard]);
  useEffect(()=>{
-  const el=ref.current,previous=document.activeElement,signature={entry:previous?.dataset?.milesEntry,label:previous?.getAttribute('aria-label'),text:previous?.textContent,href:previous?.getAttribute('href')};
+  const el=ref.current,previous=returnFocus?.current||document.activeElement,signature={entry:previous?.dataset?.milesEntry,label:previous?.getAttribute('aria-label'),text:previous?.textContent,href:previous?.getAttribute('href')};
   const scroll={x:scrollX,y:scrollY},body=document.body,old={position:body.style.position,top:body.style.top,left:body.style.left,width:body.style.width,overflow:body.style.overflow},restoration=history.scrollRestoration;
   history.scrollRestoration='manual';Object.assign(body.style,{position:'fixed',top:-scroll.y+'px',left:-scroll.x+'px',width:'100%',overflow:'hidden'});el.showModal();el.querySelector('.miles-close')?.focus({preventScroll:true});
   const viewport=()=>{const v=window.visualViewport;el.style.setProperty('--miles-vh',(v?.height||innerHeight)+'px');el.style.setProperty('--miles-keyboard-offset',Math.max(0,innerHeight-(v?.height||innerHeight)-(v?.offsetTop||0))+'px');const focus=document.activeElement;if(el.contains(focus)&&/INPUT|TEXTAREA|SELECT/.test(focus.tagName))requestAnimationFrame(()=>focus.scrollIntoView({block:'nearest'}))};

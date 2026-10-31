@@ -4,7 +4,7 @@ Use synthetic local demo data. The automated history cases live in `miles-naviga
 
 | Case | Expected / observed | Result |
 | --- | --- | --- |
-| Home entry | M+ opens over Home; Today expansion and Learning filter survive close. | PASS |
+| Home entry | M+ opens over Home; Today expansion and Learning filter survive close; both sidebar and Home CTA restore their own trigger focus. | PASS |
 | Discover entry | Search French → Explore with Miles; review opens over Discover. Discard restores query and trigger focus. | PASS |
 | Project entry | Insights → Talk with Miles; close preserves Insights and trigger. | PASS |
 | Scroll/background | Open at 166.5 px: fixed body top -166.5 px; close restores 166.5 px. Native modal makes background inert. | PASS |
