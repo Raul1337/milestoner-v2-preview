@@ -26,9 +26,12 @@ window.addEventListener('message',event=>{
 });
 // Same existing example/handler; no auto-confirmation and no persistence.
 if(settings.screen==='miles'){
+ let started=false;
  const observer=new MutationObserver(()=>{
+  const skip=[...document.querySelectorAll('.clarification button')].find(el=>['Omitir detalles desconocidos','Skip unknown details'].includes(el.textContent.trim()));
+  if(started&&skip){observer.disconnect();skip.click();requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,0)));return}
   const button=[...document.querySelectorAll('.conversation button')].find(el=>['Aprender francés','Learn French'].includes(el.textContent.trim()));
-  if(button){observer.disconnect();button.click();requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,0)))}
+  if(button&&!started){started=true;button.click()}
  });
  observer.observe(document.getElementById('root'),{childList:true,subtree:true});setTimeout(()=>observer.disconnect(),5000);
 }

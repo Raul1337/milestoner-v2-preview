@@ -13,6 +13,7 @@ export const esLabels = {
  'Evita introducir datos personales o de salud reales. “Privado” oculta el ejemplo en pantalla; no es un sistema de seguridad.':'Evita introducir datos personales o de salud reales. “Privado” oculta el ejemplo en pantalla; no es un sistema de seguridad.'
 };
 export const enLabels = {
+ 'Sin meta global':'No global target',
  'Expandir navegación':'Expand navigation','Contraer navegación':'Collapse navigation','Navegación de escritorio':'Desktop navigation',
  'Cerrar':'Close','Datos de ejemplo':'Sample data','Este registro solo modifica la demostración.':'This entry only changes the demo.',
  'Descripción':'Description','Cantidad (':'Amount (','Guardar registro ficticio':'Save sample entry','Saltar al contenido':'Skip to content',

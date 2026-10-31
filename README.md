@@ -72,3 +72,7 @@ El contenido utiliza el mismo ancho de barra para su margen y se reajusta de for
 ## V2.2 · paleta fija y fondos personalizables
 
 [Theme Playground](https://raul1337.github.io/milestoner-v2-preview/theme-playground/) ofrece System/Light/Dark, cinco fondos Light y Gray/Blue en Dark. Las identidades de categoría quedan fijadas a los tokens nativos aprobados; elegir un fondo no las recolorea. La aplicación principal continúa en V2.1.2 y la exploración usa ejemplos temporales sin acceso a su almacenamiento. Véase [decisión, colores precisos, alcance y validación](THEME_PLAYGROUND.md). Pendiente de aprobación visual; ningún nuevo fondo se aplica globalmente.
+
+## Vision V2.3A · Miles-first creation
+
+M+ ofrece tres guiones locales declarados (Japón, francés y dentista), propuestas editables y confirmación explícita. La alternativa manual permanece visible. Los nuevos planes no exigen una meta numérica; las actividades sin fecha no aparecen en Today. Un recordatorio simple no crea proyecto. Los datos anteriores y su clave local se conservan. Véase [cambios, compatibilidad y validación](CREATION_V23A.md). Pendiente de aceptación UX; no hay IA o servicios reales.

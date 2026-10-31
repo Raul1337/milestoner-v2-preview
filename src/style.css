@@ -351,3 +351,4 @@ dialog>h3 { margin-top: 20px; }
  .header-miles>span:last-child { display: none; }
  .header-miles { padding: 2px; }
 }
+.creation-elements{border:1px solid var(--border);border-radius:12px;padding:12px;margin:20px 0;min-width:0}.creation-elements legend{font-size:var(--text-secondary-size)}.creation-activity{border-bottom:1px solid var(--border);padding-bottom:8px}.clarification{margin-top:24px}dl>div{margin:16px 0}dt{font-size:var(--text-caption);color:var(--text-secondary)}dd{margin:4px 0;white-space:pre-wrap;overflow-wrap:anywhere}.miles-layout dialog{margin:auto}#reminders-section{margin-top:20px}
