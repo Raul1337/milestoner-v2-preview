@@ -1,6 +1,6 @@
 # Vision V2.3A.2 — Miles Overlay Experience
 
-V2.3A.1 is the owner-accepted functional baseline. This web-only presentation remains provisional, awaiting owner visual approval.
+V2.3A.1 is the owner-accepted functional baseline. Its functional behavior is preserved by [V2.3A.3](GEOMETRY_V23A3.md), whose owner decision supersedes the content-driven geometry below. Historical validation remains preserved.
 
 ## Result
 

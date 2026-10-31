@@ -100,3 +100,7 @@ El estado y la preferencia son locales a cada navegador, sin sincronización. La
 ## V2.3A.2 · Miles Overlay
 
 41/41 automated tests and both builds PASS. [Overlay evidence](OVERLAY_V23A2.md) separates browser interactions, visual matrix, static/token fallbacks and unverified device cases. The physical mobile keyboard and native dirty-reload prompt remain NOT VERIFIED; clean bookmark refresh and saved-content reload passed. Design remains provisional for owner visual review.
+
+## V2.3A.3 · geometría estable
+
+47/47 automated tests and both builds PASS. Seven measured stages have 0 px height delta in standard, expanded and short-viewport runs. EN/ES, Light/Dark, footer form association, internal scroll, focus/history and Theme Playground preservation are checked separately. [Measurements and limits](GEOMETRY_V23A3.md) distinguish local harness/keyboard simulation from unverified physical-device behavior. Owner visual approval remains pending.

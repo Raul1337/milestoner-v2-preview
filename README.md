@@ -84,3 +84,7 @@ Un único compositor, propuestas en modo resumen y edición contextual sustituye
 ## Vision V2.3A.2 · Miles sobre tu contexto
 
 M+ abre un modal de escritorio o una hoja móvil sobre la pantalla actual. Compositor, revisión y edición comparten una sola superficie, con descarte protegido y confirmación explícita. `#miles` conserva compatibilidad con marcadores y Atrás. Tras guardar se ofrece abrir el proyecto o recordatorio. Véase [alcance, validación y límites](OVERLAY_V23A2.md). Diseño provisional, pendiente de aprobación visual; la semántica aceptada V2.3A.1 y el almacenamiento se conservan.
+
+## Vision V2.3A.3 · geometría estable
+
+Miles mantiene su tamaño entre etapas: 78% del viewport útil en móvil, con expansión explícita, y 660 × 680 px en escritorio con límite de viewport. Encabezado y acciones fijos; contenido central desplazable. El Theme Playground conserva su geometría anterior. Véase [medidas, regresión y límites](GEOMETRY_V23A3.md). Pendiente de aprobación visual del propietario.
