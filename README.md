@@ -1,6 +1,6 @@
 # Milestoner Vision V2 · preview estática
 
-Preview responsive de la visión aprobada, con alineación visual nativa V2.1. React + Vite y CSS con tokens, sin backend. Todos los datos son ficticios; el día de demostración está fijado en **30 de octubre de 2026**. No representa actividad del usuario.
+Preview responsive de la visión aprobada, con identidad visual V2.1 aprobada y navegación responsive V2.1.1. React + Vite y CSS con tokens, sin backend. Todos los datos son ficticios; el día de demostración está fijado en **30 de octubre de 2026**. No representa actividad del usuario.
 
 ## Ejecutar
 
@@ -35,7 +35,9 @@ El estado se guarda en `localStorage` bajo `milestoner-vision-v2-demo-v1`. No in
 - `src/model.js`: fixtures, cálculos deterministas y adaptador de almacenamiento de demo. Punto de sustitución futuro para datos validados, sin implementar backend.
 - `src/main.jsx`: navegación por hash, componentes de tarjetas, diálogo nativo, formularios y pantallas React.
 - `src/tokens.css`: roles semánticos nativos, superficies y bordes de dominio, Light/Dark según el sistema.
-- `src/style.css`: layouts responsive, jerarquía tipográfica, foco visible y dock flotante en móvil y escritorio.
+- `src/Navigation.jsx`: barra lateral de escritorio y drawer móvil modal con foco y teclado.
+- `src/style.css`: layouts responsive, encabezado móvil con M+, foco visible y densidad de Home.
+- `src/language.jsx` y `src/translations.js`: presentación EN/ES, sin cambios al contrato de datos.
 - `tests/model.test.js`: periodos, agregación por unidad, exclusión de fechas futuras/recordatorios, estado vacío y persistencia/fallback.
 - `public/`: cinco SVG originales de marca, incluyendo variantes Dark y M+ blanco, sin redibujar.
 - `VISUAL_ALIGNMENT.md`: correspondencia visual con iOS y límites de la adaptación web.
@@ -49,3 +51,11 @@ La base de Vite es `/milestoner-v2-preview/`; las vistas conservan navegación p
 No se modifica la aplicación iOS ni se conectan servicios productivos.
 
 Configuración basada en las guías oficiales de [Vite](https://vite.dev/guide/static-deploy.html#github-pages) y [GitHub Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages).
+
+## Responsive Sidebar & UX Refinement V2.1.1
+
+La decisión del propietario sustituye el dock web: barra lateral persistente a partir de 901 px y drawer desde el encabezado hasta 900 px. M+ permanece visible en el encabezado móvil, con el arte original. Escape, botón de cierre y fondo cierran el drawer y devuelven el foco al menú; navegar lo cierra y lleva el foco al contenido. Tab/Shift+Tab permanecen dentro del drawer. Al pasar a escritorio se cierra y libera el desplazamiento.
+
+Home reduce la introducción a su título. Today/Hoy presenta las dos primeras tareas y permite mostrar el día completo, conservando el conteo, tareas, recordatorios y eventos existentes. En móvil, Your Life/Tu vida aparece antes del resumen de Miles. No cambia la definición de lo programado ni se filtran datos de forma nueva.
+
+El selector EN/ES traduce navegación, etiquetas, mensajes, fechas y ejemplos originales. La URL conserva `?lang=en` o `?lang=es` al recargar; sin selección explícita, se usa inglés si el navegador solicita inglés y español en los demás casos. Esto no añade claves a localStorage. Los textos personalizados se conservan literalmente, incluidos los escritos antes de esta actualización. Milestoner, Miles, M+, Apple Calendar y Google Calendar son nombres de marca sin traducir.

@@ -53,3 +53,24 @@ Estas comprobaciones validan el prototipo local. No equivalen a regresión produ
 - Revisión previa a publicación de todos los archivos candidatos y los ocho archivos del bundle: sólo fixtures y recursos estáticos. Sin credenciales, claves privadas, endpoints privados, datos reales ni rutas del sistema local. Los cinco SVG contienen únicamente geometría y estilos, sin recursos externos ni scripts. No se publican capturas nativas, archivos de entorno, cachés o dependencias instaladas.
 
 No se ejecutan builds o tests iOS, pues el alcance nativo es sólo lectura. Esta validación web no equivale a certificación de accesibilidad ni regresión productiva. El despliegue remoto del commit final se verifica por separado después de publicar; un build local no acredita ese resultado.
+
+
+## Responsive Sidebar & UX Refinement V2.1.1
+
+Baseline web: `62df7b58c32520c36e73cf45d744ad0f0ffcefde`. Publicación de preview autorizada por el propietario; aceptación UX final pendiente.
+
+- Pruebas finales: **12/12 PASS** (7 originales y 5 enfocadas en idioma, fixtures y texto personalizado); build Vite 6.4.5: PASS. Sin dependencias nuevas en la aplicación.
+- Matriz: 72 vistas, nueve rutas × EN/ES × Light/Dark × 390×844 y 1440×1000. Dimensiones efectivas verificadas, títulos y selección de idioma correctos, sin imágenes rotas ni desbordamiento de página. Sidebar/menú corresponden al breakpoint.
+- Tamaños adicionales: 320, 768, 901 y 1024 px en Home, Miles y proyecto Japón. En 320 px se repitió EN/ES tras corregir el ancho mínimo que causaba desbordamiento junto a la barra de scroll.
+- Drawer: apertura con Enter, foco inicial, ciclo Tab/Shift+Tab, Escape, cierre por fondo y botón, retorno al menú; cierre al navegar con foco en main; cierre al crecer a escritorio y restauración del scroll. El primer recorrido detectó salida de foco con Shift+Tab; corregida y revalidada.
+- Home: Today expandido conserva tareas, recordatorios y eventos. Con los ejemplos iniciales, Tu vida comienza aproximadamente a 456 px en ES y 427 px en EN a 390×844. El conteo y las fechas del modelo permanecen iguales.
+- Creación asistida y manual confirmadas en EN y ES. Registro Learning de 2 sesiones y Finance de 250 MXN reflejados en Progress. Texto personalizado `Home {0}` conservado literalmente tras recarga y cambio de idioma.
+- Calendario EN: edición, revisión y confirmación de Google Calendar simulado; evento visible en Today. Recordatorio privado revelado/marcado y recordatorio independiente creado. Preferencia On Demand persiste tras recarga y se refleja en Home; Settings guarda meta y las pestañas responden a flechas del teclado.
+- Navegación directa y por drawer/encabezado verificadas. Restablecimiento de los ejemplos de prueba completado. App abierta directamente: sin errores ni advertencias de consola observados.
+- Capturas antes/después de Home móvil, Home escritorio, creación Miles móvil y escritorio, en Light y Dark; capturas posteriores adicionales en EN. La baseline V2.1 tenía textos mezclados, conservados en las capturas anteriores como evidencia.
+- Incidencia de entorno: al alternar pestañas, el control de viewport actuó sobre la pestaña activa. Esa pasada no se contó como validación móvil; se repitió con anchura DOM comprobada. El error de inspección MutationObserver de iframes ya documentado no aparece en la app abierta directamente.
+- `src/model.js`, `src/tokens.css`, cinco SVG, dependencias, lockfile, workflow, base Vite y siete pruebas originales sin cambios. Persistencia mantiene clave, esquema y comportamiento local; no se guarda idioma ni expansión en el estado de dominio.
+- Revisión de los 23 archivos fuente candidatos y los ocho archivos de dist: sin secretos, datos personales reales, endpoints privados ni rutas del sistema local. Sólo datos sintéticos. Sin APIs nuevas, fuentes remotas o recursos externos.
+- iOS: HEAD, estado Git y hashes de 1,231 archivos comparados con el inicio; sin cambios. No se ejecutaron builds/tests nativos porque no forman parte de este alcance.
+
+El despliegue remoto se verifica después del commit final; su resultado se entrega por separado. Esta validación de preview no certifica accesibilidad ni funcionamiento en todos los dispositivos o navegadores.

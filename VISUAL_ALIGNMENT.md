@@ -1,3 +1,5 @@
+> Estado actual: la identidad V2.1 está aprobada. La decisión del propietario V2.1.1 sustituye únicamente el sistema de navegación descrito abajo por sidebar/drawer; el apartado V2.1 permanece como historial de procedencia visual.
+
 # Milestoner Vision V2 — Web Visual Alignment V2.1
 
 ## Alcance
@@ -30,3 +32,17 @@ Alineación de presentación sobre el prototipo React/Vite existente. Se conserv
 - El teclado, los selectores de fecha y el foco se representan según el navegador. No se ha certificado equivalencia en iPhone físico, VoiceOver, WCAG ni todos los navegadores.
 
 La comparación de capturas se entrega por separado al propietario. No se incorporan capturas ni documentos privados nativos a este repositorio público.
+
+## Decisión del propietario V2.1.1
+
+- Dock flotante retirado de todos los tamaños web. Sidebar de 224 px en escritorio, con marca, cinco destinos y selección explícita. Drawer móvil de hasta 320 px, sin niveles adicionales.
+- Encabezado móvil compacto con menú, marca, selector de idioma y acceso M+ directo. Permanece accesible al desplazarse; formularios y propuesta reservan margen de desplazamiento para no quedar bajo el encabezado.
+- Tokens, SVG originales, paletas, fondos atmosféricos y recetas cromáticas V2.1 conservados byte a byte.
+- Today/Hoy es expandible; Your Life/Tu vida gana visibilidad inicial en móvil. La creación conserva conversación, propuesta revisable y alternativa manual.
+- EN/ES consistente en interfaz y ejemplos. Datos escritos por el usuario no se traducen; los controles de fecha/hora y sus mensajes de validación nativos dependen del navegador/sistema.
+
+### Revisión pendiente del propietario
+
+Aceptar la densidad del resumen de Today, el tamaño del sidebar y el encabezado móvil. Los filtros de dominio siguen desplazándose dentro de su propia fila en pantallas estrechas; la página no desborda horizontalmente. Las preferencias de idioma se conservan en la URL, no se sincronizan entre dispositivos. No se añaden etapas a creación ni un nuevo sistema visual.
+
+Validación realizada en navegador integrado. Quedan fuera la certificación WCAG/VoiceOver y la comprobación en dispositivos físicos, teclados virtuales y todos los motores de navegador. Las transiciones respetan la preferencia de movimiento reducido mediante CSS; su percepción en cada dispositivo requiere revisión del propietario.
