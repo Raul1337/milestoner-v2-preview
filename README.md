@@ -68,3 +68,7 @@ En escritorio (desde 901 px), la barra comienza contraída a 72 px. El botón de
 La preferencia se guarda por navegador en `milestoner-vision-v2-sidebar-expanded-v1`, separada del estado de la demo. Sin preferencia válida, comienza contraída. Si localStorage no está disponible, el cambio funciona mientras la página siga abierta. Restablecer los ejemplos no borra esta preferencia de navegación.
 
 El contenido utiliza el mismo ancho de barra para su margen y se reajusta de forma inmediata, evitando solapamientos al cruzar el breakpoint. En móvil permanecen el drawer y el acceso M+ del encabezado; no aparece una barra permanente. Se conserva la regla de movimiento reducido del drawer. No se añaden dependencias ni cambian el modelo, tokens, assets o contratos de datos.
+
+## V2.2 · exploración aislada de temas oscuros
+
+[Theme Playground](https://raul1337.github.io/milestoner-v2-preview/theme-playground/) compara cinco atmósferas sobre las mismas pantallas, con intensidad ajustable y Light original. Es una evaluación separada: la aplicación principal continúa en V2.1.2. Los ejemplos del Playground son temporales y no acceden al almacenamiento de la app. Véase [alcance, procedencia de colores y validación](THEME_PLAYGROUND.md). Ningún tema nuevo está aprobado para uso global.

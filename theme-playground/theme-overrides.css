@@ -1,0 +1,25 @@
+/* Exploration only: color/surface overrides. No layout, type-size or spacing changes. */
+:root[data-lab-theme] body::before { background: var(--lab-atmosphere); }
+:root[data-lab-theme] .brief,
+:root[data-lab-theme] .project-hero,
+:root[data-lab-theme] .conversation {
+ background: linear-gradient(var(--lab-angle),var(--lab-hero-a),var(--lab-hero-b) 57%,var(--lab-hero-c)) padding-box, var(--parent-edge) border-box;
+}
+:root[data-lab-theme] .proposal { background: linear-gradient(var(--surface-elevated),var(--surface)) padding-box,var(--parent-edge) border-box; }
+:root[data-lab-theme] .navigation-drawer { background: linear-gradient(var(--surface),var(--canvas-flat)); }
+:root[data-lab-theme] .sidebar { background: var(--glass); }
+:root[data-lab-theme] .today>.section-title { background: linear-gradient(110deg,var(--warm-tint),var(--surface)); }
+:root[data-lab-theme] .hero-art { color: var(--travel-ink); }
+:root[data-lab-contrast="more"] { --parent-edge-width:1.5px; --child-edge-width:1px; }
+:root[data-lab-theme][data-lab-contrast="more"] body::before { background: var(--canvas-flat); }
+:root[data-lab-contrast="more"] *, :root[data-lab-contrast="more"] *::before, :root[data-lab-contrast="more"] *::after { --parent-edge:linear-gradient(var(--border),var(--border)); --child-edge:var(--parent-edge); }
+:root:not([data-lab-theme])[data-lab-contrast="more"] { --text-secondary:#2A3851; --text-tertiary:#3D4C65; --border:#75829A; --action:#2445CE; --focus:#2445CE; }
+:root[data-lab-motion="reduce"] *, :root[data-lab-motion="reduce"] *::before, :root[data-lab-motion="reduce"] *::after { transition:none!important; animation:none!important; scroll-behavior:auto!important; }
+@media(prefers-contrast:more){
+ :root[data-lab-theme] body::before { background:var(--canvas-flat); }
+ :root[data-lab-theme] .sidebar { background:var(--surface); }
+}
+@media(forced-colors:active){
+ :root[data-lab-theme] body::before { background:Canvas; }
+ :root[data-lab-theme] .brief,:root[data-lab-theme] .project-hero,:root[data-lab-theme] .conversation,:root[data-lab-theme] .proposal { background:Canvas; border-color:CanvasText; }
+}
