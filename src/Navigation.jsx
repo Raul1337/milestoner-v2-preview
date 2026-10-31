@@ -38,22 +38,22 @@ function Hint({label, enabled, children}) {
     onClick:e=>{dismiss();children.props.onClick?.(e)}
   })}{enabled&&position&&createPortal(<span id={id} role="tooltip" className="navigation-tooltip" style={position} onMouseEnter={()=>clearTimeout(hideTimer.current)} onMouseLeave={leave}>{label}</span>,document.body)}</>;
 }
-function Links({active, onNavigate, collapsed=false, id}) {
+function Links({active, onNavigate, onMiles, collapsed=false, id}) {
   const {t}=useLanguage();
-  return <nav id={id} aria-label={t('Navegación principal')}>{[['home','Home',Home],['discover','Discover',Compass],['miles','M+ · Miles',null],['progress','Progress',ChartNoAxesCombined],['you','You',User]].map(([route,label,Icon])=><Hint key={route} label={t(label)} enabled={collapsed}><a href={`#${route}`} onClick={onNavigate} aria-label={t(label)} className={`${active===route?'selected':''} ${route==='miles'?'miles-nav':''}`} aria-current={active===route?'page':undefined}>{Icon?<Icon size={22} aria-hidden="true"/>:<MPlus/>}<span className="nav-label">{t(label)}</span></a></Hint>)}</nav>;
+  return <nav id={id} aria-label={t('Navegación principal')}>{[['home','Home',Home],['discover','Discover',Compass],['miles','M+ · Miles',null],['progress','Progress',ChartNoAxesCombined],['you','You',User]].map(([route,label,Icon])=><Hint key={route} label={t(label)} enabled={collapsed}><a href={`#${route}`} onClick={e=>{if(route==='miles'&&onMiles){e.preventDefault();onMiles()}else onNavigate?.(e)}} aria-label={t(label)} className={`${active===route?'selected':''} ${route==='miles'?'miles-nav':''}`} aria-current={active===route?'page':undefined}>{Icon?<Icon size={22} aria-hidden="true"/>:<MPlus/>}<span className="nav-label">{t(label)}</span></a></Hint>)}</nav>;
 }
-export function Navigation({active,open,setOpen,menuRef,expanded,onToggle}) {
+export function Navigation({active,open,setOpen,menuRef,expanded,onToggle,onMiles}) {
   const {t}=useLanguage();
-  const dialog=useRef(),timer=useRef(),destination=useRef('menu');
+  const dialog=useRef(),timer=useRef(),destination=useRef('menu'),afterClose=useRef();
   const [visible,setVisible]=useState(false);
   function finish() {
     dialog.current?.close();setOpen(false);
-    const target=destination.current==='content'?document.getElementById('main'):menuRef.current;
-    target?.focus({preventScroll:true});
+    const target=afterClose.current?document.querySelector('.header-miles'):destination.current==='content'?document.getElementById('main'):menuRef.current;
+    target?.focus({preventScroll:true});const done=afterClose.current;afterClose.current=null;done?.();
   }
-  function close(to='menu') {
+  function close(to='menu',after) {
     if(timer.current)return;
-    destination.current=to;setVisible(false);
+    destination.current=to;afterClose.current=after;setVisible(false);
     timer.current=setTimeout(()=>{timer.current=null;finish()},matchMedia('(prefers-reduced-motion: reduce)').matches?0:180);
   }
   useEffect(()=>{
@@ -70,7 +70,7 @@ export function Navigation({active,open,setOpen,menuRef,expanded,onToggle}) {
   return <><aside className="sidebar desktop-sidebar" aria-label={t('Navegación de escritorio')}>
       <a href="#home" className="brand" aria-label={`Milestoner · ${t('Home')}`}>{expanded?<Brand/>:<picture className="compact-brand"><source media="(prefers-color-scheme: dark)" srcSet={`${import.meta.env.BASE_URL}m-plus-dark.svg`}/><img src={`${import.meta.env.BASE_URL}m-plus.svg`} alt="Milestoner"/></picture>}</a>
       <Hint label={t(expanded?'Contraer navegación':'Expandir navegación')} enabled={!expanded}><button className="sidebar-toggle" aria-label={t(expanded?'Contraer navegación':'Expandir navegación')} aria-expanded={expanded} aria-controls="desktop-navigation" onClick={onToggle}>{expanded?<PanelLeftClose size={22} aria-hidden="true"/>:<PanelLeftOpen size={22} aria-hidden="true"/>}<span className="nav-label">{t('Contraer navegación')}</span></button></Hint>
-      <Links id="desktop-navigation" active={active} collapsed={!expanded}/>
+      <Links onMiles={onMiles} id="desktop-navigation" active={active} collapsed={!expanded}/>
       {expanded&&<p className="sidebar-caption">Vision V2 · {t('Solo datos ficticios')}</p>}
     </aside>
     <dialog ref={dialog} id="mobile-navigation" className={`navigation-drawer ${visible?'is-visible':''}`} aria-label={t('Menú de navegación')} onKeyDown={e=>{
@@ -81,6 +81,6 @@ export function Navigation({active,open,setOpen,menuRef,expanded,onToggle}) {
         else if(!e.shiftKey&&document.activeElement===last){e.preventDefault();first?.focus()}
       }} onCancel={e=>{e.preventDefault();close()}} onClick={e=>{if(e.target===e.currentTarget){const r=e.currentTarget.getBoundingClientRect();if(e.clientX<r.left||e.clientX>r.right||e.clientY<r.top||e.clientY>r.bottom)close()}}}>
       <div className="drawer-heading"><Brand/><button className="icon-button" autoFocus aria-label={t('Cerrar menú')} onClick={()=>close()}><X/></button></div>
-      <Links active={active} onNavigate={()=>close('content')}/><p className="sidebar-caption">Vision V2 · {t('Solo datos ficticios')}</p>
+      <Links active={active} onNavigate={()=>close('content')} onMiles={()=>close('content',onMiles)}/><p className="sidebar-caption">Vision V2 · {t('Solo datos ficticios')}</p>
     </dialog></>;
 }

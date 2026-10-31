@@ -1,6 +1,6 @@
 # Vision V2.3A.1 — Compact conversational creation
 
-V2.3A functional behavior is the owner-accepted baseline. This increment refines web presentation only. Visual acceptance of V2.3A.1 remains with the owner.
+V2.3A functional behavior is the owner-accepted baseline. This increment refines web presentation only. The owner subsequently accepted V2.3A.1 as the functional baseline for the provisional [V2.3A.2 overlay](OVERLAY_V23A2.md). Historical validation below is preserved.
 
 ## Before and after
 

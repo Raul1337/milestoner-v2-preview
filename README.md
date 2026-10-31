@@ -80,3 +80,7 @@ M+ ofrece tres guiones locales declarados (Japón, francés y dentista), propues
 ## Vision V2.3A.1 · creación conversacional compacta
 
 Un único compositor, propuestas en modo resumen y edición contextual sustituyen los formularios siempre visibles. Japón, francés y dentista conservan confirmación explícita y las mismas reglas de datos. Los detalles confirmados reutilizan las listas compactas. B1 es una sugerencia descriptiva; las ideas de agenda siguen sin programar. Véase [cambios, pruebas y límites de revisión](CREATION_V23A1.md). Publicación de preview para revisión visual del propietario; no implica aceptación final.
+
+## Vision V2.3A.2 · Miles sobre tu contexto
+
+M+ abre un modal de escritorio o una hoja móvil sobre la pantalla actual. Compositor, revisión y edición comparten una sola superficie, con descarte protegido y confirmación explícita. `#miles` conserva compatibilidad con marcadores y Atrás. Tras guardar se ofrece abrir el proyecto o recordatorio. Véase [alcance, validación y límites](OVERLAY_V23A2.md). Diseño provisional, pendiente de aprobación visual; la semántica aceptada V2.3A.1 y el almacenamiento se conservan.

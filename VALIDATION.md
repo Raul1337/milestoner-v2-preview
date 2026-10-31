@@ -96,3 +96,7 @@ El estado y la preferencia son locales a cada navegador, sin sincronización. La
 ## V2.3A.1 · compact creation
 
 33/33 automated tests and both static builds pass. Browser review covers the three scripted proposals at 390/1440, EN/ES and Light/Dark, with focused editing, scheduling, cancellation, reload/persistence and keyboard checks. See [current evidence and limits](CREATION_V23A1.md) and [interaction regression checklist](tests/creation-interactions.md). This web pass is distinct from iOS/backend regression or production certification. Owner visual acceptance remains pending.
+
+## V2.3A.2 · Miles Overlay
+
+41/41 automated tests and both builds PASS. [Overlay evidence](OVERLAY_V23A2.md) separates browser interactions, visual matrix, static/token fallbacks and unverified device cases. The physical mobile keyboard and native dirty-reload prompt remain NOT VERIFIED; clean bookmark refresh and saved-content reload passed. Design remains provisional for owner visual review.
