@@ -1,6 +1,6 @@
 # Milestoner Vision V2 · preview estática
 
-Preview responsive de la visión aprobada, con identidad visual V2.1 aprobada y navegación responsive V2.1.1. React + Vite y CSS con tokens, sin backend. Todos los datos son ficticios; el día de demostración está fijado en **30 de octubre de 2026**. No representa actividad del usuario.
+Preview responsive de la visión aprobada, con identidad visual V2.1 aprobada y navegación compacta V2.1.2. React + Vite y CSS con tokens, sin backend. Todos los datos son ficticios; el día de demostración está fijado en **30 de octubre de 2026**. No representa actividad del usuario.
 
 ## Ejecutar
 
@@ -59,3 +59,12 @@ La decisión del propietario sustituye el dock web: barra lateral persistente a 
 Home reduce la introducción a su título. Today/Hoy presenta las dos primeras tareas y permite mostrar el día completo, conservando el conteo, tareas, recordatorios y eventos existentes. En móvil, Your Life/Tu vida aparece antes del resumen de Miles. No cambia la definición de lo programado ni se filtran datos de forma nueva.
 
 El selector EN/ES traduce navegación, etiquetas, mensajes, fechas y ejemplos originales. La URL conserva `?lang=en` o `?lang=es` al recargar; sin selección explícita, se usa inglés si el navegador solicita inglés y español en los demás casos. Esto no añade claves a localStorage. Los textos personalizados se conservan literalmente, incluidos los escritos antes de esta actualización. Milestoner, Miles, M+, Apple Calendar y Google Calendar son nombres de marca sin traducir.
+
+
+## Slim Expandable Sidebar V2.1.2
+
+En escritorio (desde 901 px), la barra comienza contraída a 72 px. El botón de expansión permite mostrar los nombres a 224 px; el hover sólo muestra el nombre del destino, nunca expande la barra. Los cinco destinos mantienen iconos, selección activa y nombres accesibles en EN/ES. Los tooltips aparecen también al recibir foco y Escape los oculta. El arte M+ original identifica la marca compacta y la entrada de creación.
+
+La preferencia se guarda por navegador en `milestoner-vision-v2-sidebar-expanded-v1`, separada del estado de la demo. Sin preferencia válida, comienza contraída. Si localStorage no está disponible, el cambio funciona mientras la página siga abierta. Restablecer los ejemplos no borra esta preferencia de navegación.
+
+El contenido utiliza el mismo ancho de barra para su margen y se reajusta de forma inmediata, evitando solapamientos al cruzar el breakpoint. En móvil permanecen el drawer y el acceso M+ del encabezado; no aparece una barra permanente. Se conserva la regla de movimiento reducido del drawer. No se añaden dependencias ni cambian el modelo, tokens, assets o contratos de datos.

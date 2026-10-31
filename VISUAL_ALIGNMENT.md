@@ -46,3 +46,10 @@ La comparación de capturas se entrega por separado al propietario. No se incorp
 Aceptar la densidad del resumen de Today, el tamaño del sidebar y el encabezado móvil. Los filtros de dominio siguen desplazándose dentro de su propia fila en pantallas estrechas; la página no desborda horizontalmente. Las preferencias de idioma se conservan en la URL, no se sincronizan entre dispositivos. No se añaden etapas a creación ni un nuevo sistema visual.
 
 Validación realizada en navegador integrado. Quedan fuera la certificación WCAG/VoiceOver y la comprobación en dispositivos físicos, teclados virtuales y todos los motores de navegador. Las transiciones respetan la preferencia de movimiento reducido mediante CSS; su percepción en cada dispositivo requiere revisión del propietario.
+
+
+## Decisión del propietario V2.1.2 — barra compacta expandible
+
+Sustituye el ancho fijo de V2.1.1 por 72 px contraídos y 224 px expandidos. La expansión es explícita y persistida; no se activa por hover. Conserva los cinco destinos y la indicación activa. El estado compacto usa la variante original M+ de marca; el expandido conserva el wordmark. La entrada Miles mantiene su círculo de marca y arte blanco originales.
+
+Paleta, tipografía, fondos, bordes cromáticos, tarjetas, temas y flujos permanecen aprobados y sin rediseño. El drawer móvil y su shortcut M+ se conservan. La actualización de ancho es inmediata para mantener alineados contenido y barra durante cualquier cambio de viewport. Capturas comparativas de Home escritorio (antes, contraído y expandido) y móvil en Light/Dark acompañan la entrega para revisión visual del propietario.

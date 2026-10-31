@@ -74,3 +74,21 @@ Baseline web: `62df7b58c32520c36e73cf45d744ad0f0ffcefde`. Publicación de previe
 - iOS: HEAD, estado Git y hashes de 1,231 archivos comparados con el inicio; sin cambios. No se ejecutaron builds/tests nativos porque no forman parte de este alcance.
 
 El despliegue remoto se verifica después del commit final; su resultado se entrega por separado. Esta validación de preview no certifica accesibilidad ni funcionamiento en todos los dispositivos o navegadores.
+
+
+## Slim Expandable Sidebar V2.1.2
+
+Baseline: `f6b227103bf3c2372fc8ac7c4f10dd109ef11f44`. Alcance: navegación de escritorio y preferencia visual independiente. Publicación de preview autorizada; aceptación visual pendiente.
+
+- Suite completa web final: **15/15 PASS**, incluidos los 12 tests anteriores y tres de preferencia/idioma. Build Vite: PASS. Sin dependencias nuevas.
+- Matriz final sobre el bundle corregido: **124 vistas PASS**. Nueve rutas × EN/ES × Light/Dark × contraído/expandido a 1440×1000 (72); Home/Miles × Light/Dark × ambos estados a 901 y 1024 px (16); nueve rutas × EN/ES × Light/Dark a 390×844 (36). Títulos, idioma, selección activa, imágenes y ausencia de desbordamiento comprobados. En escritorio, margen y barra coinciden a 72/224 px; en móvil ambos son cero y M+ permanece disponible.
+- Teclado: Tab recorre los cinco enlaces con nombres accesibles, tooltip asociado y contorno de 3 px. Enter navega y expande/contrae. Escape cierra el tooltip sin cambiar el ancho. En expandido se muestran nombres y no aparecen tooltips redundantes. Hover no modifica el estado por diseño; se revisaron sus handlers. No se certifica interacción con lector de pantalla físico.
+- Preferencia expandida y contraída conservada tras recargar. Tests comprueban fallback ante almacenamiento ausente, inválido o bloqueado, y que la clave de datos existentes no se escribe al cambiar la barra.
+- Drawer móvil: apertura por Enter, foco inicial, ciclo Tab/Shift+Tab, Escape y retorno al menú; navegación cierra y enfoca main. Crecer a escritorio cierra el drawer y restaura scroll. Cambiar entre 901 y 320 px conserva la preferencia de escritorio sin mostrar barra móvil.
+- Se detectó desbordamiento transitorio al cruzar de escritorio expandido a móvil con animación de margen. Se eliminó la animación de redimensionamiento, manteniendo una actualización simultánea de barra y contenido; se repitió la prueba. El drawer conserva su transición y su regla de movimiento reducido. Movimiento reducido revisado en código; no se modificó la preferencia del sistema durante esta sesión.
+- Creación asistida ES desde M+ móvil y manual EN desde sidebar: confirmación y navegación al proyecto, cinco proyectos tras recarga en el caso asistido, datos sintéticos restablecidos después. Los flujos de negocio y sus handlers se conservan byte a byte fuera de la conexión de navegación.
+- Capturas antes/después de Home escritorio y móvil en Light/Dark, más estados contraído/expandido y tooltip con foco. No es una certificación visual de todos los navegadores o dispositivos.
+- Privacidad: 25 archivos fuente y ocho archivos del bundle revisados; sólo fixtures sintéticos. Sin secretos, endpoints privados, rutas locales, APIs nuevas ni recursos remotos. SVG originales sin scripts ni referencias externas; sus referencias internas a gradientes son válidas. Los únicos URL del bundle son namespaces XML y documentación de errores de React.
+- Preservación: modelo, tokens, cinco assets, dependencias/lockfile, base, workflow y pruebas anteriores sin cambios. iOS: HEAD, estado Git y hashes de 1,231 archivos idénticos al inicio; sin builds/tests nativos.
+
+El estado y la preferencia son locales a cada navegador, sin sincronización. La verificación remota del despliegue y la consola directa se entrega después de publicar el commit final. Los avisos del inspector en iframes, ya documentados en V2.1.1, se separan de la app directa.
