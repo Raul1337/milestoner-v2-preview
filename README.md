@@ -1,6 +1,6 @@
 # Milestoner Vision V2 · preview estática
 
-Primera integración responsive de la visión aprobada. React + Vite y CSS con tokens, sin backend. Todos los datos son ficticios; el día de demostración está fijado en **30 de octubre de 2026**. No representa actividad del usuario.
+Preview responsive de la visión aprobada, con alineación visual nativa V2.1. React + Vite y CSS con tokens, sin backend. Todos los datos son ficticios; el día de demostración está fijado en **30 de octubre de 2026**. No representa actividad del usuario.
 
 ## Ejecutar
 
@@ -34,9 +34,11 @@ El estado se guarda en `localStorage` bajo `milestoner-vision-v2-demo-v1`. No in
 
 - `src/model.js`: fixtures, cálculos deterministas y adaptador de almacenamiento de demo. Punto de sustitución futuro para datos validados, sin implementar backend.
 - `src/main.jsx`: navegación por hash, componentes de tarjetas, diálogo nativo, formularios y pantallas React.
-- `src/style.css`: tokens de marca/dominio, layouts responsive, foco visible, reducción de movimiento y dock móvil.
+- `src/tokens.css`: roles semánticos nativos, superficies y bordes de dominio, Light/Dark según el sistema.
+- `src/style.css`: layouts responsive, jerarquía tipográfica, foco visible y dock flotante en móvil y escritorio.
 - `tests/model.test.js`: periodos, agregación por unidad, exclusión de fechas futuras/recordatorios, estado vacío y persistencia/fallback.
-- `public/`: dos SVG originales copiados de los recursos internos de marca, sin modificación.
+- `public/`: cinco SVG originales de marca, incluyendo variantes Dark y M+ blanco, sin redibujar.
+- `VISUAL_ALIGNMENT.md`: correspondencia visual con iOS y límites de la adaptación web.
 
 ## GitHub Pages
 

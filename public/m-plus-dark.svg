@@ -1,0 +1,46 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="278" height="126" viewBox="12 28 278 126" role="img" aria-labelledby="title description">
+<title id="title">Milestoner · mountain-m-plus-color-dark</title>
+<desc id="description">Milestoner Heatmap Flow, Variant C / Variante C — Terminal fluido. Design direction approved; production candidate pending user review. Trademark clearance not completed for symbol or name.</desc>
+<defs>
+<linearGradient id="heat" x1="20" y1="88" x2="224" y2="103" gradientUnits="userSpaceOnUse"><stop offset="0" stop-color="#52D5F0"/><stop offset=".36" stop-color="#5D9AFF"/><stop offset=".68" stop-color="#7D78FF"/><stop offset="1" stop-color="#B985FF"/></linearGradient>
+<linearGradient id="flow" x1="29" y1="144" x2="192" y2="83" gradientUnits="userSpaceOnUse">
+<stop stop-color="#55DFF3"/><stop offset=".39" stop-color="#62CAFF" stop-opacity=".08"/>
+<stop offset=".67" stop-color="#99B1FF" stop-opacity=".1"/><stop offset="1" stop-color="#C4A5FF"/>
+</linearGradient><clipPath id="silhouette-clip"><path d="M24 125
+C36 107 52 80 67 55
+C73 45 79 42 86 44
+C93 46 96 49 102 58
+L121.2 86.8 Q122 88 122.8 86.7 L146 49
+C153.3846 37 158 36 165 36
+C173 36 178.1667 43 184 53
+L219 113
+C230.0833 132 220 143 209 143
+C200 143 194.9412 139 190 131
+L169 97 C165.2941 91 161.4 91 158 97
+L141 127 C135.9 136 131 140 123 140
+C115 140 110.12 136 105 128
+L89 103 C85.16 97 80.3448 97 76 104
+L58 133 C51.7931 143 40 147 30 145
+C18 142.6 16 137 24 125 Z"/></clipPath></defs><path id="mountain-m-silhouette" fill="url(#heat)" d="M24 125
+C36 107 52 80 67 55
+C73 45 79 42 86 44
+C93 46 96 49 102 58
+L121.2 86.8 Q122 88 122.8 86.7 L146 49
+C153.3846 37 158 36 165 36
+C173 36 178.1667 43 184 53
+L219 113
+C230.0833 132 220 143 209 143
+C200 143 194.9412 139 190 131
+L169 97 C165.2941 91 161.4 91 158 97
+L141 127 C135.9 136 131 140 123 140
+C115 140 110.12 136 105 128
+L89 103 C85.16 97 80.3448 97 76 104
+L58 133 C51.7931 143 40 147 30 145
+C18 142.6 16 137 24 125 Z"/><g id="heatmap-flow-ribbon" clip-path="url(#silhouette-clip)"><path fill="url(#flow)" opacity=".72" d="M14 145 C33 126 47 121 62 103 C72 89 83 87 94 99
+L113 122 C121 132 129 124 137 108 L150 84 C157 72 172 72 181 88
+L232 162 L213 170 L170 112 C165 104 162 103 157 113
+L144 139 C131 158 112 155 101 139 L84 114 C80 110 76 110 72 118 L56 144 Z"/></g><path id="action-plus" fill="#A9BAFF" d="M258 67 Q258 63 262 63 L264 63 Q268 63 268 67 L268 75
+L276 75 Q280 75 280 79 L280 81 Q280 85 276 85 L268 85
+L268 93 Q268 97 264 97 L262 97 Q258 97 258 93 L258 85
+L250 85 Q246 85 246 81 L246 79 Q246 75 250 75 L258 75 Z"/>
+</svg>

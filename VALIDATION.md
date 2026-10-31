@@ -29,3 +29,27 @@ Estas comprobaciones validan el prototipo local. No equivalen a regresión produ
 - Bundle servido bajo el subdirectorio de Pages: Home revisado a 1440×1000 y 390×844. En móvil, Home, Discover, Miles, Progress, You y los cuatro proyectos cargan con encabezados visibles, cero imágenes rotas y sin desbordamiento horizontal. Sin errores ni advertencias de consola observados.
 - Repositorio público independiente previsto: `Raul1337/milestoner-v2-preview`. El repositorio iOS no se abrió ni modificó durante esta preparación.
 - Publicación remota y URL pública: pendientes de ejecución y verificación; estas comprobaciones locales no acreditan un despliegue.
+
+
+## Web Visual Alignment V2.1 · 30 de octubre de 2026 (hora local)
+
+### Fuente y alcance
+
+- Baseline web: `fb58a870bab385f089635ba6c917350514fce2d8`. Cambios limitados a CSS, presentación JSX, tres variantes de marca originales y documentación.
+- Modelo, fixtures, pruebas, dependencias, lockfile, base de Vite y workflow conservados byte a byte. Revisión del diff JSX: sin cambios de handlers, formularios, cálculos, rutas o persistencia.
+- Tokens contrastados con las fuentes nativas y las capturas sintéticas aportadas. Véase VISUAL_ALIGNMENT.md para las diferencias de plataforma y aceptación pendiente.
+
+### Validación ejecutada en la compilación estática
+
+- Pruebas existentes del modelo: 7/7 PASS; compilación Vite: PASS.
+- Matriz de 36 vistas: Home, Discover, Miles, Progress, You y cuatro proyectos × Light/Dark × 390×844 y 1440×1000. Encabezados visibles, cero imágenes rotas y sin desbordamiento horizontal.
+- Light/Dark comprobados con media queries reales, heredadas desde un contenedor de revisión local con color-scheme. Los contenedores no forman parte del bundle publicado.
+- Revisión de capturas: Home, proyectos, Progress y creación, además de propuesta editable y diálogo. Correspondencia visual cualitativa; no se afirma igualdad de píxeles entre SwiftUI y navegador.
+- Recorrido interactivo: completar tarea y conservarla tras recarga; Discover busca francés y abre propuesta; descarte; creación asistida y manual; registro Finance de 250 MXN reflejado en Progress.
+- Calendario simulado: revisar, volver a editar lugar, confirmar Google Calendar simulado, aparecer en Today y quitar el evento con confirmación.
+- Recordatorio privado: revelar ejemplo y marcarlo; recordatorio puntual creado y visible en Home.
+- Preferencias: On Demand persiste tras recarga y modifica Miles Brief; Settings guarda meta de proyecto. Restablecimiento de los datos de prueba comprobado.
+- App abierta directamente: sin errores ni advertencias de consola observados durante el recorrido. El entorno de inspección emite un error MutationObserver al navegar iframes; se reprodujo en un control vacío sin JavaScript, separado de la app.
+- Revisión previa a publicación de todos los archivos candidatos y los ocho archivos del bundle: sólo fixtures y recursos estáticos. Sin credenciales, claves privadas, endpoints privados, datos reales ni rutas del sistema local. Los cinco SVG contienen únicamente geometría y estilos, sin recursos externos ni scripts. No se publican capturas nativas, archivos de entorno, cachés o dependencias instaladas.
+
+No se ejecutan builds o tests iOS, pues el alcance nativo es sólo lectura. Esta validación web no equivale a certificación de accesibilidad ni regresión productiva. El despliegue remoto del commit final se verifica por separado después de publicar; un build local no acredita ese resultado.
