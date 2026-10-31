@@ -1,34 +1,34 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {themes,themeTokens,contrastReport,contrast,normalizeSettings,rgb} from '../theme-playground/themes.js';
-
-test('contrast calculation uses WCAG relative luminance reference pairs',()=>{
+import {readFileSync} from 'node:fs';
+import {backgrounds,backgroundTokens,normalizeSettings,resolveAppearance,contrastReport} from '../theme-playground/themes.js';
+import {approvedCategories,contrast} from '../theme-playground/native-palette.js';
+const css=readFileSync(new URL('../src/tokens.css',import.meta.url),'utf8');
+const parse=s=>Object.fromEntries([...s.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(m=>[m[1],m[2]]));
+const light=parse(css.split('@media')[0]),dark={...light,...parse(css.split('@media (prefers-color-scheme: dark) {')[1].split('/* Re-evaluate')[0])};
+const baseline={light,dark};
+test('approved native inks, graphics and tiles remain frozen in Light/Dark',()=>{
+ const expected={fitness:['#00734C','#2AE9AB','#009B6A','#2AE9AB','#D8FAEB','#123F34'],learning:['#7436C9','#C197FF','#8C44E8','#B77CFF','#F0E4FF','#3C285C'],career:['#005EC9','#65B4FF','#0079F2','#48A8FF','#E0EFFF','#163D64'],social:['#B52C4E','#FF8AA0','#E44365','#FF6C89','#FFE5EB','#512936'],finance:['#805300','#FFD447','#AE7900','#F6C638','#FFF0C6','#473B20'],wellbeing:['#A1480A','#FFAC66','#C96812','#FF9D47','#FFEAD8','#4B3326']};
+ for(const [id,p] of Object.entries(expected)){const c=approvedCategories[id];assert.deepEqual([c.light.ink,c.dark.ink,c.light.graphic,c.dark.graphic,c.light.tile,c.dark.tile],p)}
+});
+test('all backgrounds and accessibility fallbacks preserve category identities and existing travel tokens',()=>{
+ for(const appearance of ['light','dark'])for(const background of backgrounds.filter(b=>b.appearance===appearance))for(const more of [false,true])for(const opaque of [false,true]){
+  const v=backgroundTokens(background,baseline[appearance],more,opaque);
+  for(const [id,c] of Object.entries(approvedCategories))for(const [role,key] of [['ink','ink'],['accent','graphic'],['edge','ink'],['tint','tile']])assert.equal(v[`--${id}-${role}`],c[appearance][key]);
+  for(const key of Object.keys(baseline[appearance]).filter(k=>k.startsWith('--travel-')))assert.equal(v[key],baseline[appearance][key]);
+ }
+});
+test('neutral text, actions and native icons meet their contrast thresholds',()=>{
  assert.equal(contrast('#000000','#FFFFFF'),21);
- assert.equal(contrast('#FFFFFF','#FFFFFF'),1);
- assert.ok(Math.abs(contrast('#777777','#FFFFFF')-4.478)<.002);
-});
-test('all five atmospheres keep readable semantic text and controls across the intensity range',()=>{
- for(const theme of themes)for(let intensity=0;intensity<=100;intensity+=5)for(const more of [false,true]){
-  const r=contrastReport(theme,intensity,more);
-  assert.ok(r.minimumText>=4.5,`${theme.id} ${intensity}: text ${r.minimumText}`);
-  assert.ok(r.action>=4.5,`${theme.id}: action text`);
-  assert.ok(r.focus>=3,`${theme.id}: focus`);
-  assert.ok(r.boundary>=3,`${theme.id}: input boundary`);
+ for(const b of backgrounds)for(const more of [false,true]){
+  const v=backgroundTokens(b,baseline[b.appearance],more),r=contrastReport(v);assert.ok(r.minimumText>=4.5,`${b.id}: text ${r.minimumText}`);assert.ok(r.action>=4.5,`${b.id}: action ${r.action}`);
+  for(const bg of b.colors)assert.ok(contrast(v['--action'],bg)>=4.5,`${b.id}: action on canvas`);
+  for(const c of Object.values(approvedCategories)){const p=c[b.appearance];assert.ok(contrast(p.graphic,p.tile)>=3,c.id);assert.ok(contrast(p.ink,p.tile)>=4.5,c.id)}
  }
 });
-test('directions differ in canvas and surfaces, not only in accents, and mix numbered sources',()=>{
- assert.deepEqual(themes.map(t=>t.name),['Electric Night','Ember Glow','Emerald Night','Copper Night','Velvet Dusk']);
- for(const theme of themes)assert.ok(new Set(theme.colors.map(c=>c[2])).size>=3);
- for(let a=0;a<themes.length;a++)for(let b=a+1;b<themes.length;b++){
-  const ta=themeTokens(themes[a]),tb=themeTokens(themes[b]);
-  assert.notEqual(ta['--lab-atmosphere'],tb['--lab-atmosphere']);
-  const va=rgb(ta['--surface']),vb=rgb(tb['--surface']);
-  assert.ok(Math.hypot(...va.map((v,i)=>v-vb[i]))>20,`${themes[a].id}/${themes[b].id}: surface separation`);
- }
-});
-test('preview URLs accept only known settings and clamp intensity',()=>{
- assert.deepEqual(normalizeSettings({theme:'unknown',screen:'<script>',appearance:'system',intensity:'bad'}),normalizeSettings());
- assert.equal(normalizeSettings({intensity:500}).intensity,100);
- assert.equal(normalizeSettings({intensity:-40}).intensity,0);
- assert.equal(normalizeSettings({appearance:'light',contrast:'more',motion:'reduce'}).appearance,'light');
+test('system appearance resolves both branches and invalid URLs fall back safely',()=>{
+ assert.equal(resolveAppearance('system',true),'dark');assert.equal(resolveAppearance('system',false),'light');assert.equal(resolveAppearance('light',true),'light');assert.equal(resolveAppearance('dark',false),'dark');
+ assert.deepEqual(normalizeSettings({appearance:'unknown',lightBackground:'electric',darkBackground:'ember',screen:'<script>'}),normalizeSettings());
+ assert.equal(backgrounds.filter(b=>b.appearance==='light').length,5);assert.equal(backgrounds.filter(b=>b.appearance==='dark').length,2);
+ assert.equal(new Set(backgrounds.map(b=>b.colors.join())).size,7);
 });

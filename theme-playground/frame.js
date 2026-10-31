@@ -1,41 +1,34 @@
-import {themes,normalizeSettings,themeTokens} from './themes.js';
-import baselineLight from 'virtual:baseline-light';
+import {backgrounds,normalizeSettings,resolveAppearance,backgroundTokens} from './themes.js';
+import baseline from 'virtual:baseline';
 import '../src/main.jsx';
 import './theme-overrides.css';
-const query=new URLSearchParams(location.search);
-let settings=normalizeSettings(Object.fromEntries(query));
+let settings=normalizeSettings(Object.fromEntries(new URLSearchParams(location.search)));
+const scheme=matchMedia('(prefers-color-scheme: dark)'),high=matchMedia('(prefers-contrast: more)'),opaque=matchMedia('(prefers-reduced-transparency: reduce)');
 let applied=[];
+function artwork(){document.querySelectorAll('picture source').forEach(source=>{source.media=document.documentElement.dataset.labAppearance==='dark'?'all':'not all'})}
 function apply(next){
  settings=normalizeSettings({...settings,...next});
- const root=document.documentElement;
- const more=settings.contrast==='more'||matchMedia('(prefers-contrast: more)').matches;
- applied.forEach(key=>root.style.removeProperty(key));applied=[];
- root.style.colorScheme=settings.appearance;
- root.dataset.labContrast=settings.contrast;
- root.dataset.labMotion=settings.motion;
- if(settings.appearance==='dark'){
-  root.dataset.labTheme=settings.theme;
-  const values=themeTokens(themes.find(t=>t.id===settings.theme),settings.intensity,more);
-  Object.entries(values).forEach(([key,value])=>root.style.setProperty(key,value));applied=Object.keys(values);
- }else {delete root.dataset.labTheme;const values={...baselineLight,...(more?{'--text-secondary':'#2A3851','--text-tertiary':'#3D4C65','--border':'#75829A','--action':'#2445CE','--focus':'#2445CE'}:{})};Object.entries(values).forEach(([key,value])=>root.style.setProperty(key,value));applied=Object.keys(values)}
- syncArtwork();
+ const appearance=resolveAppearance(settings.appearance,scheme.matches),root=document.documentElement;
+ const background=backgrounds.find(b=>b.id===(appearance==='dark'?settings.darkBackground:settings.lightBackground));
+ applied.forEach(key=>root.style.removeProperty(key));
+ const more=settings.contrast==='more'||high.matches,solid=settings.transparency==='reduce'||opaque.matches;
+ const values=backgroundTokens(background,baseline[appearance],more,solid);
+ Object.entries(values).forEach(([key,value])=>root.style.setProperty(key,value));applied=Object.keys(values);
+ root.style.colorScheme=appearance;
+ Object.assign(root.dataset,{labAppearance:appearance,labBackground:background.id,labContrast:more?'more':'normal',labMotion:settings.motion,labTransparency:solid?'reduce':'system'});
+ artwork();
 }
-function syncArtwork(){
- document.querySelectorAll('picture source').forEach(source=>{source.media=settings.appearance==='dark'?'all':'not all'});
-}
-new MutationObserver(syncArtwork).observe(document.getElementById('root'),{childList:true,subtree:true});
+new MutationObserver(artwork).observe(document.getElementById('root'),{childList:true,subtree:true});
 apply(settings);
-matchMedia('(prefers-contrast: more)').addEventListener('change',()=>apply(settings));
+[scheme,high,opaque].forEach(media=>media.addEventListener('change',()=>apply(settings)));
 window.addEventListener('message',event=>{
- if(event.origin!==location.origin||event.source!==parent||event.data?.type!=='milestoner-theme-preview')return;
- apply(event.data.settings);
+ if(event.origin===location.origin&&event.source===parent&&event.data?.type==='milestoner-background-preview')apply(event.data.settings);
 });
-// A deterministic scene invokes the existing example proposal, using its unchanged handler.
+// Same existing example/handler; no auto-confirmation and no persistence.
 if(settings.screen==='miles'){
  const observer=new MutationObserver(()=>{
   const button=[...document.querySelectorAll('.conversation button')].find(el=>['Aprender francés','Learn French'].includes(el.textContent.trim()));
   if(button){observer.disconnect();button.click();requestAnimationFrame(()=>requestAnimationFrame(()=>window.scrollTo(0,0)))}
  });
- observer.observe(document.getElementById('root'),{childList:true,subtree:true});
- setTimeout(()=>observer.disconnect(),5000);
+ observer.observe(document.getElementById('root'),{childList:true,subtree:true});setTimeout(()=>observer.disconnect(),5000);
 }

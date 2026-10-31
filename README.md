@@ -69,6 +69,6 @@ La preferencia se guarda por navegador en `milestoner-vision-v2-sidebar-expanded
 
 El contenido utiliza el mismo ancho de barra para su margen y se reajusta de forma inmediata, evitando solapamientos al cruzar el breakpoint. En móvil permanecen el drawer y el acceso M+ del encabezado; no aparece una barra permanente. Se conserva la regla de movimiento reducido del drawer. No se añaden dependencias ni cambian el modelo, tokens, assets o contratos de datos.
 
-## V2.2 · exploración aislada de temas oscuros
+## V2.2 · paleta fija y fondos personalizables
 
-[Theme Playground](https://raul1337.github.io/milestoner-v2-preview/theme-playground/) compara cinco atmósferas sobre las mismas pantallas, con intensidad ajustable y Light original. Es una evaluación separada: la aplicación principal continúa en V2.1.2. Los ejemplos del Playground son temporales y no acceden al almacenamiento de la app. Véase [alcance, procedencia de colores y validación](THEME_PLAYGROUND.md). Ningún tema nuevo está aprobado para uso global.
+[Theme Playground](https://raul1337.github.io/milestoner-v2-preview/theme-playground/) ofrece System/Light/Dark, cinco fondos Light y Gray/Blue en Dark. Las identidades de categoría quedan fijadas a los tokens nativos aprobados; elegir un fondo no las recolorea. La aplicación principal continúa en V2.1.2 y la exploración usa ejemplos temporales sin acceso a su almacenamiento. Véase [decisión, colores precisos, alcance y validación](THEME_PLAYGROUND.md). Pendiente de aprobación visual; ningún nuevo fondo se aplica globalmente.
