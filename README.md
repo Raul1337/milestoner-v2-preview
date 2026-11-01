@@ -55,7 +55,15 @@ Agenda is a projection of explicitly dated activities, saved reminders and confi
 
 New events start without an assumed date, hour, location or destination. Title/date/project/simulated destination are explicitly reviewed; hour and location may remain blank. Review is not a save. Confirmation creates once or edits the existing ID; a duplicate project/title/date/hour produces an explicit explanation and keeps the draft available. Cancel/discard does not persist; returning from discard preserves typed fields. Existing saved event values and unknown metadata remain compatible. Apple/Google labels are unconnected simulations; nothing is delivered externally.
 
-Pending owner UX acceptance: date-focused Agenda and its project context filter. Events retain the existing project association contract; standalone calendar events, real providers, recurrence, time zones and all-day event semantics require separate decisions. An empty time currently means only that no hour is stored.
+V2.3D Agenda is provisionally accepted, including its date selection and project context filter. Events retain the existing project association contract; standalone calendar events, real providers, recurrence, time zones and all-day event semantics require separate decisions. An empty time currently means only that no hour is stored.
+
+## Progress V2.4
+
+Overall Progress counts eligible records, projects with activity and days with entries; it never adds incompatible units. Distribution and frequency bars use record counts, with visible text equivalents. Project views show selected-period values/history separately from clearly labeled lifetime metrics through the fixed demo day. Week remains 24–30 October, month 1–30 October and year 1 January–30 October 2026. Filters retain their existing page-session behavior.
+
+Finance sums recorded contributions and shows lifetime savings, valid stored target and remaining amount. Fitness uses the maximum session distance; first-to-last change is described only when two different record dates exist. Learning sums recorded sessions and counts days with records, without claiming streaks or B1 proficiency. Travel shows preparations/history and links to its saved planning; no trip percentage. Generic Miles units have history and counts without invented totals/targets. No global completion percentage is used.
+
+Progress and Project Details share eligible project entries and specialized metric calculations. Invalid calendar dates, non-positive/non-finite values, future records, private records, unknown-project/reminder records are excluded; Progress also excludes private projects. No stored record is rewritten, generated or migrated. Completed tasks and calendar events do not become progress. Insights are deterministic descriptions of these same records; Home Miles Insight logic is unchanged. The V2.4 layout awaits owner UX acceptance.
 
 ## Storage and privacy
 

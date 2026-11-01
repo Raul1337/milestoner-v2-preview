@@ -1,7 +1,8 @@
 import {TODAY} from './model.js';
+import {validDate} from './agenda-model.js';
 
 export function projectEntries(state,project){
- return state.logs.filter(r=>r.project===project.id&&/^\d{4}-\d{2}-\d{2}$/.test(r.date||'')&&r.date<=TODAY&&Number.isFinite(r.value)&&r.value>0).slice().sort((a,b)=>b.date.localeCompare(a.date));
+ return state.logs.filter(r=>r.project===project.id&&!r.private&&validDate(r.date)&&r.date<=TODAY&&Number.isFinite(r.value)&&r.value>0).slice().sort((a,b)=>b.date.localeCompare(a.date));
 }
 export function detailMetric(state,project){
  const kind=({learning:'sesiones',fitness:'km',finance:'MXN'})[project.domain];
