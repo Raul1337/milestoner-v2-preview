@@ -5,12 +5,19 @@ function arcSlots(count,rx,ry){
  return Array.from({length:count},(_,i)=>{const target=(i+.5)*lengths[samples]/count;let j=1;while(lengths[j]<target)j++;const t=(target-lengths[j-1])/(lengths[j]-lengths[j-1]);return {x:points[j-1].x+(points[j].x-points[j-1].x)*t,y:points[j-1].y+(points[j].y-points[j-1].y)*t}});
 }
 export function universeLayout(width,count=8,expanded=false){
- const w=Math.max(240,width),n=expanded?count:Math.min(count,8),wide=w>=700,gap=12,max=wide?160:Math.min(112,Math.max(92,w*96/273)),profile=wide?208:Math.min(140,Math.max(120,w*.47)),pad=max/2+gap;
+ const w=Math.max(240,width),n=expanded?count:Math.min(count,8),wide=w>=700,compact=w<450,gap=12,max=wide?160:compact?Math.min(94,Math.max(80,w*90/343)):Math.min(112,Math.max(92,w*96/273)),profile=wide?208:compact?Math.min(122,Math.max(104,w*118/343)):Math.min(140,Math.max(120,w*.47)),pad=max/2+gap;
+ if(compact&&n<=8){
+  // Authored staggered orbit: reserve the largest tier, independently of affinity.
+  const rx=w/2-max/2-8,ry=max*1.95,cy=ry+max/2+8,height=cy*2;
+  const slots=[[-.17*w,-1.90*max],[.22*w,-1.82*max],[rx,-.74*max],[rx-4,.80*max],[.16*w,1.93*max],[-.21*w,1.77*max],[-rx,.75*max],[-rx+3,-.83*max]];
+  return {width:w,height,max,profile,compact,nodes:slots.slice(0,n).map(([x,y])=>({x:x+w/2,y:y+cy})),cx:w/2,cy,rx,ry};
+ }
+
  if(!wide){
   const outer=w/2-pad,inner=(max+gap)/2,rows=expanded&&n>8?Math.ceil(n/2):4,split=Math.floor(rows/2),step=max+gap,centerGap=max/2+profile/2+20;
   const cy=pad+(split-1)*step+centerGap,height=pad*2+(rows-2)*step+centerGap*2;
   const nodes=Array.from({length:n},(_,i)=>{const row=Math.floor(i/2),side=i%2?1:-1;const spread=rows===4?(row===0||row===3?inner:outer):inner+(outer-inner)*Math.sin(Math.PI*(row+.5)/rows);return {x:w/2+side*spread,y:pad+row*step+(row>=split?centerGap*2-step:0)}});
-  return {width:w,height,max,profile,nodes,cx:w/2,cy,rx:outer,ry:height/2-pad};
+  return {width:w,height,max,profile,compact,nodes,cx:w/2,cy,rx:outer,ry:height/2-pad};
  }
  const rx=w/2-pad;let ry=180,nodes=[];
  // Expanded collections may grow vertically; normal desktop stays a compact ellipse.
@@ -22,4 +29,4 @@ export function universeLayout(width,count=8,expanded=false){
  const height=2*(ry+pad),cy=height/2;
  return {width:w,height,max,profile,nodes:nodes.map(p=>({x:p.x+w/2,y:p.y+cy})),cx:w/2,cy,rx,ry};
 }
-export function affinityDiameter(affinity,max){return Math.max(56,max*({love:1,like:.84,curious:.70,'not-really':.60}[affinity]??.70))}
+export function affinityDiameter(affinity,max,compact=false){const tiers=compact?{love:1,like:.89,curious:.78,'not-really':.69}:{love:1,like:.84,curious:.70,'not-really':.60};return Math.max(56,max*(tiers[affinity]??tiers.curious))}

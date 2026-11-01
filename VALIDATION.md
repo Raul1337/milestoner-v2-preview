@@ -38,3 +38,7 @@ After normal push, verify the workflow for the exact commit succeeded, remote `m
 CI and Git history retain technical results. Use temporary/ignored diagnostics during work; deliver only a concise change summary, URL, commit, tests/build outcome and remaining blocker/decision. No new permanent screenshot/log/JSON/HTML evidence package by default. A current lightweight `/review/` comparison is optional when useful, not a mandatory report.
 
 Web validation is separate from iOS/backend regression, production readiness or physical-device/accessibility certification. Record blocked or untested cases as such; never reclassify them as passed.
+
+## Current local mobile candidate
+
+V2.5B.1d remains local pending owner visual review. Compare `/review/` before/after captures at 320/375/390/428px. Check all four affinities (including 56px minimum), complete text lines and full accessible names, EN/ES and Light/Dark, unchanged positions after edits/reload, expanded single-profile collection and M+ return. Geometry tests additionally sweep every container width from 273 through 449px using maximum-size bubbles; desktop geometry must equal the `cf0af46` baseline. Do not publish this composition before owner review.

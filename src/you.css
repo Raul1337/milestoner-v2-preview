@@ -33,3 +33,20 @@
 .you-orbital .interest-node.long-name strong{font-size:clamp(.6875rem,1.3cqw,.95rem)}
 .you-orbital .interest-node>svg{width:clamp(26px,4cqw,36px);height:clamp(26px,4cqw,36px)}
 .you-orbital .interest-node.affinity-not-really>svg{width:20px;height:20px}
+
+/* V2.5B.1d mobile candidate: smaller profile and content, unchanged desktop. */
+@container(max-width:449px){
+ .you-orbital .profile-node{border-width:3px;gap:1px;box-shadow:0 0 0 5px color-mix(in srgb,var(--surface-elevated) 35%,transparent),0 0 24px color-mix(in srgb,var(--action) 24%,transparent)}
+ .you-orbital .profile-node .illustrated-avatar{width:52%;max-height:51%}
+ .you-orbital .profile-node>strong{font-size:.8125rem;line-height:1.15}
+ .you-orbital .profile-node>span:last-child{font-size:.6875rem;padding:2px 5px;gap:1px}
+ .you-orbital .interest-node{padding:5px;gap:3px}
+ .you-orbital .interest-node>svg{width:24px;height:24px}
+ .you-orbital .interest-node.affinity-curious>svg{width:19px;height:19px}
+ .you-orbital .interest-node.affinity-not-really{padding:3px;gap:2px}
+ .you-orbital .interest-node.affinity-not-really>svg{width:16px;height:16px}
+ .you-orbital .interest-node strong,.you-orbital .interest-node.long-name strong{font-size:.6875rem;line-height:1.15;flex-shrink:0}
+ .you-orbital .you-universe-actions{margin-top:12px;gap:8px}
+ .you-orbital .you-universe-actions>*{min-height:56px;border-radius:18px;font-size:.75rem;gap:6px}
+ .you-orbital .you-universe-actions>* svg:last-child{display:none}
+}
