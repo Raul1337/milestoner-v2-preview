@@ -42,3 +42,7 @@ Web validation is separate from iOS/backend regression, production readiness or 
 ## Approved mobile baseline
 
 V2.5B.1e source candidate `c3bae01` was owner-approved for Web preview publication on 1 November 2026. Validate 320/390px Light/Dark, unchanged desktop geometry, single expanded canvas/profile, interest details and identity-preserving affinity edits, reload and navigation. Existing geometry checks cover 273–449px containers and maximum-size bubbles. Full publication gate remains 112 tests and all three builds; verify the exact published SHA in Actions and live Pages. Approval does not extend to native iOS or production services.
+
+## Local Profile Overview V2.5B.2a candidate
+
+Pending owner visual acceptance; do not publish yet. `tests/profile-overview.test.js` verifies the three-record projection, original record/project identities and dates, existing privacy/date/value eligibility, no task/event-derived achievements, empty state and saved Miles/long-content compatibility without persistence changes. Browser checks cover 320/375/390/768/1440, EN/ES and Light/Dark: four readable unavailable statistics, one shared illustrated portrait, compact empty domain/badge sections, activity destinations, Progress/Settings/Universe, Back/Forward/reload, M+ return and visible interactive focus without a persistent heading outline. Capture only the five requested final views. Keep the recovered mockup outside public assets and all build outputs; any reference comparison is private and local only.
