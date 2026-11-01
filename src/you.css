@@ -25,3 +25,11 @@
 .you-orbital .interest-node>svg{width:clamp(25px,4cqw,40px);height:clamp(25px,4cqw,40px)}
 .you-orbital .interest-node.long-name>svg{width:22px;height:22px}
 .you-orbital .universe-canvas{background:radial-gradient(ellipse at center,color-mix(in srgb,var(--brand-violet) 8%,transparent),transparent 68%)}
+
+/* Compact labels are previews; full names remain in accessible names and Interest Detail. */
+.you-orbital .profile-node{top:var(--profile-y)}
+.you-orbital .interest-node{padding:6px;gap:4px}
+.you-orbital .interest-node strong{font-size:clamp(.6875rem,1.3cqw,.95rem);line-height:1.12;display:-webkit-box;-webkit-box-orient:vertical;-webkit-line-clamp:2;overflow:hidden;max-width:100%}
+.you-orbital .interest-node.long-name strong{font-size:clamp(.6875rem,1.3cqw,.95rem)}
+.you-orbital .interest-node>svg{width:clamp(26px,4cqw,36px);height:clamp(26px,4cqw,36px)}
+.you-orbital .interest-node.affinity-not-really>svg{width:20px;height:20px}
