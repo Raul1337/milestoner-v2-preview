@@ -24,12 +24,22 @@ Open `/milestoner-v2-preview/#home`. `npm run preview` serves the production bui
 - Centered Home, collapsible Today and Your Life, compact desktop project grid and mobile project list, Projects/Reminders switch, category filter and chronological independent reminders.
 - Desktop contextual Miles Insight; mobile bell and anchored popover. Opening or any passive close keeps the suggestion pending. Only explicit Dismiss or contextual Review consumes it.
 - Separate M+ creation overlay: scripted Japan, French and dentist flows, editable proposals, manual creation, explicit confirmation and protected discard. Stable Balanced78 mobile geometry and centered desktop modal.
-- Four example projects retain Overview/Insights/Settings and project-specific Progress. Reminders remain independent; unscheduled ideas do not appear in Today. Calendar choices are local simulations.
+- Original and Miles-created projects share a centered Project Details shell with Overview/Insights/Settings, compact activity editors, contextual planning/scheduling and project-specific records. Reminders remain independent; unscheduled ideas do not appear in Today. Calendar choices are local simulations.
 - EN/ES, system Light/Dark, original brand artwork, domain colors, expandable desktop sidebar and mobile drawer.
 
 Stable review links: [`?lang=es&appearance=dark#home`](https://raul1337.github.io/milestoner-v2-preview/?lang=es&appearance=dark#home), [`?lang=en&appearance=light#home`](https://raul1337.github.io/milestoner-v2-preview/?lang=en&appearance=light#home), and [`?lang=es&type=reminders#home`](https://raul1337.github.io/milestoner-v2-preview/?lang=es&type=reminders#home). `appearance` is optional; without it the app follows the system. `collapsed=1` can initialize the Your Life disclosure for review; it does not persist a new preference.
 
 The isolated [Theme Playground](https://raul1337.github.io/milestoner-v2-preview/theme-playground/) remains a separate visual exploration with temporary examples. It does not replace the active palette or use the app storage. The local `build:lab` contains display-test controls; the public build excludes those controls.
+
+## Project Details V2.3B
+
+Japan retains its illustrative itinerary, budget and preparatory activities; French separates learning activities, session records and optional descriptive B1; running shows best recorded distance; finance shows recorded contributions and its savings target. Task completion never adds progress. No universal completion percentage is used.
+
+Legacy and Miles-created records keep their existing shapes and keys; there is no migration. Activity edits retain IDs, completion and date associations. Existing legacy Today behavior is preserved; dated Miles activities still follow their explicit dates. Calendar ideas remain suggestions until a separate event is explicitly reviewed and confirmed in the simulation. Quick editors use the existing accessible dialog; deeper review stays on the project screen. Creation PlanSummary and the Theme Playground remain isolated.
+
+Metrics are shown only for compatible stored units. Generic Miles plans keep generic entries; no new numeric-goal contract is introduced. Legacy French shows B1 as an optional descriptive suggestion; Miles plans can edit their existing descriptive milestone field without relabeling legacy records.
+
+Project Details layout and section hierarchy await owner UX review. Home UX remains provisionally accepted.
 
 ## Storage and privacy
 
