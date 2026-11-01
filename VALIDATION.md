@@ -39,6 +39,6 @@ CI and Git history retain technical results. Use temporary/ignored diagnostics d
 
 Web validation is separate from iOS/backend regression, production readiness or physical-device/accessibility certification. Record blocked or untested cases as such; never reclassify them as passed.
 
-## Current local mobile candidate
+## Approved mobile baseline
 
-V2.5B.1d remains local pending owner visual review. Compare `/review/` before/after captures at 320/375/390/428px. Check all four affinities (including 56px minimum), complete text lines and full accessible names, EN/ES and Light/Dark, unchanged positions after edits/reload, expanded single-profile collection and M+ return. Geometry tests additionally sweep every container width from 273 through 449px using maximum-size bubbles; desktop geometry must equal the `cf0af46` baseline. Do not publish this composition before owner review.
+V2.5B.1e source candidate `c3bae01` was owner-approved for Web preview publication on 1 November 2026. Validate 320/390px Light/Dark, unchanged desktop geometry, single expanded canvas/profile, interest details and identity-preserving affinity edits, reload and navigation. Existing geometry checks cover 273–449px containers and maximum-size bubbles. Full publication gate remains 112 tests and all three builds; verify the exact published SHA in Actions and live Pages. Approval does not extend to native iOS or production services.
