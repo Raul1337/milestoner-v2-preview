@@ -26,3 +26,8 @@ export function detailsPatch(project,values){
  }
  return patch;
 }
+
+// Read-only context: never infer bookings, proficiency or completion from tasks.
+export function detailContext(state,project){
+ return {latest:projectEntries(state,project)[0]||null,eventCount:state.events.filter(e=>e.project===project.id).length,hasIdeas:!!project.vision?.calendar?.trim()};
+}

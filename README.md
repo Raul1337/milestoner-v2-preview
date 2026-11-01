@@ -31,7 +31,7 @@ Stable review links: [`?lang=es&appearance=dark#home`](https://raul1337.github.i
 
 The isolated [Theme Playground](https://raul1337.github.io/milestoner-v2-preview/theme-playground/) remains a separate visual exploration with temporary examples. It does not replace the active palette or use the app storage. The local `build:lab` contains display-test controls; the public build excludes those controls.
 
-## Project Details V2.3B
+## Project Details V2.3B.1
 
 Japan retains its illustrative itinerary, budget and preparatory activities; French separates learning activities, session records and optional descriptive B1; running shows best recorded distance; finance shows recorded contributions and its savings target. Task completion never adds progress. No universal completion percentage is used.
 
@@ -39,7 +39,7 @@ Legacy and Miles-created records keep their existing shapes and keys; there is n
 
 Metrics are shown only for compatible stored units. Generic Miles plans keep generic entries; no new numeric-goal contract is introduced. Legacy French shows B1 as an optional descriptive suggestion; Miles plans can edit their existing descriptive milestone field without relabeling legacy records.
 
-Project Details layout and section hierarchy await owner UX review. Home UX remains provisionally accepted.
+V2.3B functionality is accepted. The V2.3B.1 hierarchy puts the next preparatory/learning action first for travel/language, and recorded distance/savings first for fitness/finance. The next-step button focuses its existing activity; Insights interprets the latest eligible record without repeating the action or metric card. Empty schedules use a small explicit scheduling action; unscheduled ideas remain separate disclosures. Project configuration is available in Settings; contextual activity/budget/idea editing remains in Overview. This hierarchy awaits owner UX review. Home UX remains provisionally accepted.
 
 ## Storage and privacy
 
