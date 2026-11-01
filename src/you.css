@@ -50,3 +50,11 @@
  .you-orbital .you-universe-actions>*{min-height:56px;border-radius:18px;font-size:.75rem;gap:6px}
  .you-orbital .you-universe-actions>* svg:last-child{display:none}
 }
+
+/* Route-heading focus remains available to assistive technology; controls retain their focus ring. */
+@container(max-width:449px){
+ .you-universe-heading h1[tabindex="-1"]:focus{outline:none}
+ .you-orbital .interest-node{padding-inline:1px}
+ .you-orbital .interest-node strong{overflow-wrap:normal;word-break:normal;hyphens:none}
+ .you-orbital .interest-node.single-word strong{display:block;white-space:nowrap;text-overflow:ellipsis}
+}
