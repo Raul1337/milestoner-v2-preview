@@ -352,3 +352,35 @@ dialog>h3 { margin-top: 20px; }
  .header-miles { padding: 2px; }
 }
 .creation-elements{border:1px solid var(--border);border-radius:12px;padding:12px;margin:20px 0;min-width:0}.creation-elements legend{font-size:var(--text-secondary-size)}.creation-activity{border-bottom:1px solid var(--border);padding-bottom:8px}.clarification{margin-top:24px}dl>div{margin:16px 0}dt{font-size:var(--text-caption);color:var(--text-secondary)}dd{margin:4px 0;white-space:pre-wrap;overflow-wrap:anywhere}.miles-layout dialog{margin:auto}#reminders-section{margin-top:20px}
+
+/* Home addendum: a single hierarchy, independent of Miles. Theme lab keeps its baseline. */
+.home-simplified { display: block; max-width: 1120px; margin-inline: auto; }
+.home-simplified .home-top { display: block; margin-bottom: 20px; }
+.home-simplified .today { width: 100%; margin: 0; }
+.home-simplified .your-life { margin-top: 0; }
+.home-simplified .miles-insight { display: grid; grid-template-columns: minmax(0,1fr) var(--target); align-items: center; column-gap: 4px; margin: 0 0 20px; padding: 4px 12px; border: 1px solid var(--border); border-radius: var(--radius-child); background: var(--glass); }
+.insight-copy { display: contents; }
+.insight-heading { display: flex; align-items: center; flex-wrap: wrap; gap: 8px; }
+.miles-insight .insight-heading { grid-column: 1; grid-row: 1; min-width: 0; }
+.insight-heading .mplus-button { width: 22px; height: 22px; box-shadow: none; }
+.insight-heading .mplus-button img { width: 17px; height: 12px; }
+.insight-heading h2 { font-size: var(--text-secondary-size); }
+.insight-heading small { font-size: var(--text-caption); color: var(--text-secondary); }
+.miles-insight p { grid-column: 1 / -1; grid-row: 2; margin: 0; max-width: none; font-size: var(--text-secondary-size); line-height: 1.4; overflow-wrap: anywhere; }
+.miles-insight .text-button { grid-column: 1 / -1; grid-row: 3; justify-self: start; padding: 8px 0; font-size: var(--text-caption); }
+.miles-insight .insight-dismiss { grid-column: 2; grid-row: 1; }
+@media(min-width:651px) {
+ .home-simplified .today-list { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+@media(min-width:901px) {
+ .home-simplified .miles-insight { grid-template-columns: auto minmax(0,1fr) auto var(--target); column-gap: 16px; padding-block: 8px; }
+ .miles-insight p { grid-column: 2; grid-row: 1; }
+ .miles-insight .text-button { grid-column: 3; grid-row: 1; }
+ .miles-insight .insight-dismiss { grid-column: 4; }
+}
+@media(prefers-reduced-transparency:reduce), (prefers-contrast:more) {
+ .home-simplified .miles-insight { background: var(--surface-elevated); }
+}
+@media(forced-colors:active) {
+ .home-simplified .miles-insight { border-color: CanvasText; background: Canvas; }
+}

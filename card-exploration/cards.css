@@ -1,0 +1,45 @@
+/* Isolated exploration selectors. Existing Home and Theme Playground keep their defaults. */
+.card-lab-controls { padding: 8px 16px; margin: 0 0 20px; border: 1px solid var(--border); border-radius: var(--radius-child); background: var(--glass); }
+.card-lab-controls summary { cursor: pointer; min-height: var(--target); font-size: var(--text-secondary-size); font-weight: 650; }
+.card-lab-controls summary::marker { color: var(--action); }
+.card-lab-options { display: flex; flex-wrap: wrap; align-items: end; gap: 12px 20px; padding: 8px 0; }
+.card-lab-options>p { flex: 1 1 240px; font-size: var(--text-caption); margin: 4px 0 0; }
+.card-lab-controls label { margin: 0; font-size: var(--text-caption); }
+.card-lab-controls select { min-height: var(--target); font-size: var(--text-caption); padding: 8px; margin-top: 4px; }
+.card-exploration--responsive main { max-width: 1480px; }
+.card-exploration--responsive .home-simplified { max-width: none; }
+.card-exploration--responsive .home-simplified>.page-heading, .card-exploration--responsive .home-top, .card-exploration--responsive .miles-insight { max-width: 1120px; margin-inline: auto; }
+.card-exploration .your-life { scroll-margin-top: 88px; }
+.lab-life { container: projectlife / inline-size; }
+.project-grid.card-grid-exploration { display: grid; grid-template-columns: minmax(0,1fr); gap: 12px; }
+.exploration-card { display: grid; grid-template-columns: 48px minmax(0,1fr) 18px; column-gap: 12px; row-gap: 3px; padding: 12px; align-items: start; }
+.exploration-identity { display: contents; }
+.project-media { grid-column: 1; grid-row: 1 / 5; width: 48px; height: 48px; display: grid; place-items: center; color: var(--ink); background: var(--tile-fill); border: 1px solid color-mix(in srgb,var(--edge) 20%,transparent); border-radius: var(--radius-child); }
+.project-illustration { display: none; }
+.exploration-category { grid-column: 2; grid-row: 2; font-size: var(--text-caption); color: var(--ink); overflow-wrap: anywhere; }
+.project-affordance { grid-column: 3; grid-row: 1 / 5; align-self: center; color: var(--ink); }
+.exploration-card>h3 { grid-column: 2; grid-row: 1; font-size: 1rem; line-height: 1.35; margin: 0; overflow-wrap: anywhere; }
+.exploration-card>.project-next { grid-column: 2; grid-row: 3; font-size: .8125rem; line-height: 1.4; margin: 2px 0 0; color: var(--text-secondary); overflow-wrap: anywhere; }
+.exploration-card>.project-specific-metric { grid-column: 2; grid-row: 4; margin: 3px 0 0; display: flex; flex-wrap: wrap; gap: 2px 6px; font-size: var(--text-compact); line-height: 1.5; color: var(--text-secondary); }
+.project-specific-metric strong { color: var(--text); font-weight: 600; }
+.card-empty { grid-column: 1 / -1; padding: 28px; border: 1px dashed var(--border); border-radius: var(--radius-card); text-align: center; background: var(--glass); }
+.card-empty p { margin: 8px 0 16px; }
+@container projectlife (min-width: 620px) {
+ .project-grid.card-grid-exploration { grid-template-columns: repeat(2,minmax(0,1fr)); gap: 14px; }
+ .exploration-card { display: flex; flex-direction: column; align-items: stretch; padding: 14px; gap: 0; }
+ .exploration-identity { display: flex; align-items: center; gap: 10px; min-height: 44px; }
+ .project-media { width: 76px; height: 44px; flex-shrink: 0; }
+ .project-media.has-illustration { background: transparent; border-color: transparent; }
+ .has-illustration .project-illustration { display: block; width: 76px; height: 44px; }
+ .has-illustration .media-category-icon { display: none; }
+ .exploration-category { flex: 1; }
+ .project-affordance { flex-shrink: 0; }
+ .exploration-card>h3 { font-size: 1.125rem; line-height: 1.3; margin-top: 8px; }
+ .exploration-card>.project-next { margin-top: 8px; }
+ .exploration-card>.project-specific-metric { margin-top: auto; padding-top: 10px; }
+}
+@container projectlife (min-width: 960px) { .project-grid.card-grid-exploration { grid-template-columns: repeat(3,minmax(0,1fr)); } }
+@container projectlife (min-width: 1360px) { .project-grid.card-grid-exploration { grid-template-columns: repeat(4,minmax(0,1fr)); } }
+@media(min-width:901px) { .card-exploration .your-life { scroll-margin-top: 16px; } }
+@media(prefers-reduced-transparency:reduce), (prefers-contrast:more) { .card-lab-controls, .card-empty { background: var(--surface-elevated); } }
+@media(forced-colors:active) { .exploration-card, .project-media, .card-empty, .card-lab-controls { border-color: CanvasText; } }

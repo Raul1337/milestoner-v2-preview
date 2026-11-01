@@ -5,3 +5,8 @@ dist/
 .env.*
 *.local
 playground-dist/
+
+card-exploration-dist/
+.work/
+.cache/
+*.log

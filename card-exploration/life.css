@@ -1,0 +1,28 @@
+.life-section-heading { display: flex; justify-content: space-between; align-items: center; gap: 12px; min-height: var(--target); margin-bottom: 10px; }
+.life-section-heading h2 { font-size: var(--text-headline); }
+.life-collapse { flex-shrink: 0; }
+.life-collapse[aria-expanded=true] svg { transform: rotate(180deg); }
+.life-collapsed-summary { font-size: var(--text-caption); margin-top: 3px; }
+.life-controls { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin-bottom: 12px; }
+.life-type-switch { display: inline-flex; max-width: 100%; padding: 3px; border: 1px solid var(--border); border-radius: 14px; background: var(--pill); }
+.life-type-switch button { display: inline-flex; align-items: center; justify-content: center; gap: 5px; min-height: var(--target); padding: 8px; border-radius: 10px; font-size: var(--text-caption); font-weight: 600; }
+.life-type-switch button[aria-selected=true] { color: var(--on-action); background: var(--action); }
+.life-type-switch button span { font-size: var(--text-compact); opacity: .8; }
+.life-category { margin: 0; max-width: 100%; }
+.life-category select { width: 8.5rem; max-width: 100%; min-height: var(--target); margin: 0; padding: 8px; font-size: var(--text-caption); background: var(--glass); }
+.life-filter-result { margin: 0 0 10px; font-size: var(--text-caption); }
+.life-reminders { max-width: 900px; list-style: none; padding: 0; margin: 0; display: grid; gap: 6px; }
+.reminder-date-group { font-size: var(--text-caption); color: var(--text-secondary); margin: 12px 0 6px; }
+.life-reminders li:first-child .reminder-date-group { margin-top: 0; }
+.life-reminder-row { display: grid; grid-template-columns: 64px minmax(0,1fr) 18px; align-items: center; gap: 10px; width: 100%; min-height: 60px; padding: 10px 12px; border: 1px solid var(--border); border-radius: var(--radius-child); background: var(--glass); text-align: left; }
+.reminder-time { display: flex; align-items: center; gap: 5px; font-size: var(--text-caption); color: var(--text-secondary); overflow-wrap: anywhere; }
+.reminder-row-body { min-width: 0; }
+.reminder-row-title { display: flex; align-items: center; gap: 6px; font-size: var(--text-secondary-size); font-weight: 600; overflow-wrap: anywhere; }
+.reminder-row-title.is-done { text-decoration: line-through; color: var(--text-secondary); }
+.reminder-row-done { display: flex; align-items: center; gap: 4px; margin-top: 3px; }
+.life-reminder-row>svg { color: var(--text-secondary); }
+.life-empty { grid-column: 1 / -1; padding: 24px; border: 1px dashed var(--border); border-radius: var(--radius-card); background: var(--glass); text-align: center; }
+.life-empty p { margin: 8px 0 14px; font-size: var(--text-secondary-size); }
+@media(hover:hover) { .life-reminder-row:hover { background: var(--interactive); } }
+@media(prefers-reduced-transparency:reduce), (prefers-contrast:more) { .life-reminder-row, .life-category select, .life-empty { background: var(--surface-elevated); } }
+@media(forced-colors:active) { .life-type-switch, .life-reminder-row, .life-empty { border-color: CanvasText; } }

@@ -4,6 +4,7 @@ import {fileURLToPath} from 'node:url';
 const root=fileURLToPath(new URL('.',import.meta.url));
 // Only this separate build substitutes ephemeral storage. Production modules stay intact.
 export default defineConfig({
+ define:{'import.meta.env.VITE_CURRENT_HOME':JSON.stringify('false'),'import.meta.env.VITE_PROJECT_CARD_LAB':JSON.stringify('false')},
  root:root+'theme-playground',base:'/milestoner-v2-preview/theme-playground/',publicDir:root+'public',
  build:{outDir:root+'playground-dist',emptyOutDir:true,rollupOptions:{input:{playground:root+'theme-playground/index.html',frame:root+'theme-playground/frame.html'}}},
  plugins:[{name:'isolated-playground-data',enforce:'pre',resolveId(id,importer){

@@ -1,0 +1,3 @@
+.today-heading-actions{display:flex;align-items:center;gap:4px;flex-shrink:0}.today-heading-actions .icon-button{width:44px;min-width:44px;height:44px}.today-section-toggle[aria-expanded=true] svg{transform:rotate(180deg)}.card-exploration .today>.section-title>div:first-child{min-width:0}.card-exploration .today[data-section-collapsed=true]{padding-bottom:0}.card-exploration .today[data-section-collapsed=true]>.section-title{margin-bottom:0;border-bottom-color:transparent}
+.quick-insight-sheet{height:auto}.quick-insight-sheet header,.quick-insight-sheet footer{flex-shrink:0}.quick-insight-body{flex:0 1 auto;padding-bottom:4px}.quick-insight-sheet footer{margin-top:8px}
+@media(max-width:900px){.quick-insight-sheet{height:auto}}

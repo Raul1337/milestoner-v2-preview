@@ -1,5 +1,6 @@
 // Presentation only. Stored fixture values and domain identifiers stay unchanged.
 export const esLabels = {
+ 'Miles Insight':'Sugerencia de Miles',
  Home:'Inicio', Discover:'Descubrir', Progress:'Progreso', You:'Tú', Today:'Hoy', 'Your Life':'Tu vida',
  'Miles Brief':'Resumen de Miles', Overview:'Resumen', Insights:'Perspectivas', Settings:'Ajustes', Schedule:'Agenda',
  'View full progress':'Ver todo el progreso', 'On Demand':'A petición', Balanced:'Equilibrado', Proactive:'Proactivo',
@@ -13,6 +14,13 @@ export const esLabels = {
  'Evita introducir datos personales o de salud reales. “Privado” oculta el ejemplo en pantalla; no es un sistema de seguridad.':'Evita introducir datos personales o de salud reales. “Privado” oculta el ejemplo en pantalla; no es un sistema de seguridad.'
 };
 export const enLabels = {
+ 'Miles Insight':'Miles Insight',
+ 'Ocultar sugerencia de Miles':'Dismiss Miles insight',
+ 'Te falta comparar alojamientos en Kioto.':'You still need to compare stays in Kyoto.',
+ 'Te queda una práctica de conversación pendiente.':'You have a conversation practice left to review.',
+ 'Revisar preparativo':'Review preparation','Revisar práctica':'Review practice',
+ 'Solo sugerencias puntuales con contexto confirmado.':'Occasional suggestions with confirmed context only.',
+ 'Más oportunidades relevantes, una sugerencia a la vez.':'More relevant opportunities, one suggestion at a time.',
  'Sin meta global':'No global target',
  'Expandir navegación':'Expand navigation','Contraer navegación':'Collapse navigation','Navegación de escritorio':'Desktop navigation',
  'Cerrar':'Close','Datos de ejemplo':'Sample data','Este registro solo modifica la demostración.':'This entry only changes the demo.',

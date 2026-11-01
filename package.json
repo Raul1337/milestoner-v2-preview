@@ -8,7 +8,8 @@
     "build": "vite build",
     "preview": "vite preview --host 127.0.0.1",
     "test": "node --test tests/*.test.js",
-    "build:playground": "vite build --config playground.vite.config.js"
+    "build:playground": "vite build --config playground.vite.config.js",
+    "build:lab": "vite build --config card-exploration.vite.config.js"
   },
   "dependencies": {
     "lucide-react": "^0.468.0",

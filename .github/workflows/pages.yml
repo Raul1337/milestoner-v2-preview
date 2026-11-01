@@ -27,6 +27,8 @@ jobs:
       - run: npm ci
       - run: npm test
       - run: npm run build
+      - name: Check isolated interaction lab build
+        run: npm run build:lab
       - name: Build isolated theme playground
         run: |
           npm run build:playground
