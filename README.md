@@ -63,7 +63,17 @@ Overall Progress counts eligible records, projects with activity and days with e
 
 Finance sums recorded contributions and shows lifetime savings, valid stored target and remaining amount. Fitness uses the maximum session distance; first-to-last change is described only when two different record dates exist. Learning sums recorded sessions and counts days with records, without claiming streaks or B1 proficiency. Travel shows preparations/history and links to its saved planning; no trip percentage. Generic Miles units have history and counts without invented totals/targets. No global completion percentage is used.
 
-Progress and Project Details share eligible project entries and specialized metric calculations. Invalid calendar dates, non-positive/non-finite values, future records, private records, unknown-project/reminder records are excluded; Progress also excludes private projects. No stored record is rewritten, generated or migrated. Completed tasks and calendar events do not become progress. Insights are deterministic descriptions of these same records; Home Miles Insight logic is unchanged. The V2.4 layout awaits owner UX acceptance.
+Progress and Project Details share eligible project entries and specialized metric calculations. Invalid calendar dates, non-positive/non-finite values, future records, private records, unknown-project/reminder records are excluded; Progress also excludes private projects. No stored record is rewritten, generated or migrated. Completed tasks and calendar events do not become progress. Insights are deterministic descriptions of these same records; Home Miles Insight logic is unchanged. V2.4 is the provisionally accepted Progress functional and UX baseline.
+
+## Discover V2.5A
+
+Discover has an independent fictional editorial catalog: eight bilingual ideas across the four supported domains. It does not reuse Home fixtures, infer interests, read history for recommendations, or add categories. Search combines localized copy/curated keywords with the category filter; cards reveal details and two possible starting actions.
+
+Explore with Miles opens a deterministic manual template in the existing overlay. Every proposal stays editable and unsaved until explicit confirmation. No dates, budgets, targets, B1 levels, itinerary, events or bookings are assigned. Confirmation uses the accepted manual project shape; there is no new discovery provenance field or storage migration.
+
+A saved project with a matching normalized title and category is identified on the idea card, with access to the existing project. The two curated language titles are recognized after reload; proposal edits also compare stored and displayed project titles. Matches are conservative title comparisons, not semantic duplicate detection. An existing match is disclosed in Miles and the confirmation explicitly says it will create another independent project. Renamed or semantically related projects are not inferred. Discovery-specific checks do not change the three scripted creation flows.
+
+Pending owner UX acceptance: the catalog, editorial card presentation and explicit duplicate-aware proposal wording. Future personalization and stronger idea/project association require separate decisions; neither is implied here.
 
 ## Storage and privacy
 
