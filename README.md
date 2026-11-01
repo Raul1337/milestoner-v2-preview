@@ -45,7 +45,17 @@ V2.3B functionality is accepted. The V2.3B.1 hierarchy puts the next preparatory
 
 Today retains its existing counts, legacy tasks, explicitly dated Miles activities and confirmed events. The saved Reminders collection includes future dates, uses the existing chronological ordering, and opens the same detail/edit flow from either view. Optional hours remain empty; no duplicate entities or future recurring occurrences are created. Existing recurrence labels are preserved verbatim in storage and localized for display.
 
-Recurrence remains a label, not a scheduler or history. A future recurrence design needs owner decisions on which occurrence completion affects, how subsequent dates are generated, and how edits apply to one occurrence versus the series. None is inferred in this increment. The desktop expansion awaits owner UX acceptance.
+Recurrence remains a label, not a scheduler or history. A future recurrence design needs owner decisions on which occurrence completion affects, how subsequent dates are generated, and how edits apply to one occurrence versus the series. None is inferred in this increment. V2.3C is the provisionally accepted Today/Reminders baseline.
+
+## Agenda V2.3D
+
+[Agenda](https://raul1337.github.io/milestoner-v2-preview/#agenda/2026-10-30) opens contextually from Today and Project Details, with a compact week selector, date jump and optional project context. It adds no primary navigation destination. Date/context live in the hash so reload and Back/Forward retain the selection; M+ returns to that context.
+
+Agenda is a projection of explicitly dated activities, saved reminders and confirmed demo events, using original IDs. Unscheduled ideas/itineraries stay out. Legacy Today still selects the first legacy task without assigning it a date: it can need attention in Today while remaining undated in Agenda. Completion never creates progress. Project-filtered Agenda excludes independent reminders; All includes them. Existing recurrence labels do not generate occurrences.
+
+New events start without an assumed date, hour, location or destination. Title/date/project/simulated destination are explicitly reviewed; hour and location may remain blank. Review is not a save. Confirmation creates once or edits the existing ID; a duplicate project/title/date/hour produces an explicit explanation and keeps the draft available. Cancel/discard does not persist; returning from discard preserves typed fields. Existing saved event values and unknown metadata remain compatible. Apple/Google labels are unconnected simulations; nothing is delivered externally.
+
+Pending owner UX acceptance: date-focused Agenda and its project context filter. Events retain the existing project association contract; standalone calendar events, real providers, recurrence, time zones and all-day event semantics require separate decisions. An empty time currently means only that no hour is stored.
 
 ## Storage and privacy
 

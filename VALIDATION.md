@@ -12,7 +12,7 @@ npm run build:lab
 npm run build:playground
 ```
 
-`npm test` runs every `tests/*.test.js` file: model, creation/editing, scheduling, navigation/history, stable geometry, translations, sidebar preferences, card metrics, reminder chronology, insight selection/consumption storage, palette/contrast, build-mode isolation and unified Project Details compatibility/metrics. The public build enables the accepted Home while excluding lab controls; Theme Playground explicitly disables the current-Home and lab flags.
+`npm test` runs every `tests/*.test.js` file: model, creation/editing, scheduling, navigation/history, stable geometry, translations, sidebar preferences, card metrics, reminder chronology, insight selection/consumption storage, palette/contrast, build-mode isolation unified Project Details compatibility/metrics, and Agenda projections/week navigation/event confirmation/duplicate prevention. The public build enables the accepted Home while excluding lab controls; Theme Playground explicitly disables the current-Home and lab flags.
 
 Block publication for test/build failures, unintended source changes, sensitive content or broken Pages assets. Inspect all new/changed files and final bundles, including SVG metadata and external URLs. Publish synthetic data only. Do not stage generated builds, caches, diagnostic logs or review matrices.
 
@@ -25,6 +25,7 @@ Run the public build under the Pages base, not only the development server:
 - Pending bell: open/close by bell, outside click, Escape and X; reload/reopen retains pending. Dismiss and contextual Review persist consumption. Review opens the correct Project; Back/Forward do not revive it. Verify focus and keyboard, modes and independent M+.
 - Japan/French/dentist, manual creation, cancellation/discard, explicit confirmation, saved-content reload and project navigation. Unknown times stay empty; B1 stays descriptive and calendar ideas stay unscheduled.
 - Discover, unified project Overview/Insights/Settings, Progress, simulated calendar and You/preferences. Check original and Miles-created projects, long titles/empty activities, quick editing/cancellation, identity/date association, B1 as descriptive only, ideas as unscheduled, and maximum-distance/summed-contribution metrics from actual non-future records. Verify contextual section order, next-step keyboard focus on the matching activity, non-repetitive Insights, compact empty scheduling, and Settings as the project configuration entry.
+- Agenda from Today/Project Details; explicit dates only, project filter, chronological type labels, untimed items, private masking until reveal, recurrence labels without expansion, week/date/hash Back/Forward/reload and M+ return. Event creation starts blank, review does not save, explicit confirmation/identity-preserving edit, duplicate explanation without draft loss, cancel/discard/focus restoration. Compare original activity/reminder/event records across Agenda, Today and Project Details.
 - Isolated Theme Playground loads without adopting app state or current Home behavior.
 
 After normal push, verify the workflow for the exact commit succeeded, remote `main` matches the commit and the public HTTPS preview loads the new bundle and relevant flows. A local build alone is not a verified deployment.
