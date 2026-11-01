@@ -21,7 +21,7 @@ Open `/milestoner-v2-preview/#home`. `npm run preview` serves the production bui
 
 ## Current experience
 
-- Centered Home, collapsible Today and Your Life, compact desktop project grid and mobile project list, Projects/Reminders switch, category filter and chronological independent reminders.
+- Centered Home, collapsible Today and Your Life, compact desktop project grid and mobile project list, mobile Projects/Reminders switch, category filter and chronological independent reminders. Desktop shows Projects and a separate independently collapsible Reminders section below Your Life.
 - Desktop contextual Miles Insight; mobile bell and anchored popover. Opening or any passive close keeps the suggestion pending. Only explicit Dismiss or contextual Review consumes it.
 - Separate M+ creation overlay: scripted Japan, French and dentist flows, editable proposals, manual creation, explicit confirmation and protected discard. Stable Balanced78 mobile geometry and centered desktop modal.
 - Original and Miles-created projects share a centered Project Details shell with Overview/Insights/Settings, compact activity editors, contextual planning/scheduling and project-specific records. Reminders remain independent; unscheduled ideas do not appear in Today. Calendar choices are local simulations.
@@ -39,7 +39,13 @@ Legacy and Miles-created records keep their existing shapes and keys; there is n
 
 Metrics are shown only for compatible stored units. Generic Miles plans keep generic entries; no new numeric-goal contract is introduced. Legacy French shows B1 as an optional descriptive suggestion; Miles plans can edit their existing descriptive milestone field without relabeling legacy records.
 
-V2.3B functionality is accepted. The V2.3B.1 hierarchy puts the next preparatory/learning action first for travel/language, and recorded distance/savings first for fitness/finance. The next-step button focuses its existing activity; Insights interprets the latest eligible record without repeating the action or metric card. Empty schedules use a small explicit scheduling action; unscheduled ideas remain separate disclosures. Project configuration is available in Settings; contextual activity/budget/idea editing remains in Overview. This hierarchy awaits owner UX review. Home UX remains provisionally accepted.
+V2.3B functionality is accepted. The V2.3B.1 hierarchy puts the next preparatory/learning action first for travel/language, and recorded distance/savings first for fitness/finance. The next-step button focuses its existing activity; Insights interprets the latest eligible record without repeating the action or metric card. Empty schedules use a small explicit scheduling action; unscheduled ideas remain separate disclosures. Project configuration is available in Settings; contextual activity/budget/idea editing remains in Overview. V2.3B.1 is the provisionally accepted Project Details baseline. Home UX remains provisionally accepted.
+
+## Today and Reminders V2.3C
+
+Today retains its existing counts, legacy tasks, explicitly dated Miles activities and confirmed events. The saved Reminders collection includes future dates, uses the existing chronological ordering, and opens the same detail/edit flow from either view. Optional hours remain empty; no duplicate entities or future recurring occurrences are created. Existing recurrence labels are preserved verbatim in storage and localized for display.
+
+Recurrence remains a label, not a scheduler or history. A future recurrence design needs owner decisions on which occurrence completion affects, how subsequent dates are generated, and how edits apply to one occurrence versus the series. None is inferred in this increment. The desktop expansion awaits owner UX acceptance.
 
 ## Storage and privacy
 
