@@ -3,9 +3,9 @@
 @media(hover:hover){.interest-node:hover,.profile-node:hover{outline:1px solid var(--action);outline-offset:3px}}@media(prefers-reduced-motion:reduce){.interest-node,.profile-node{transition:none;animation:none}}@media(prefers-contrast:more),(prefers-reduced-transparency:reduce){.you-proposals,.you-proposal{background:var(--surface-elevated)}}@media(forced-colors:active){.interest-node,.profile-node,.you-proposals,.you-proposal,.you-avatar{border-color:CanvasText;background:Canvas;color:CanvasText}.universe-orbits{display:none}}
 
 /* Authored orbital composition at every width. No interest grid breakpoint. */
-.you-orbital{background:radial-gradient(ellipse at 20% 35%,color-mix(in srgb,var(--brand-primary) 9%,transparent),transparent 65%),radial-gradient(ellipse at 95% 80%,color-mix(in srgb,var(--brand-violet) 12%,transparent),transparent 65%);border-radius:40px}
+.you-orbital{background:none;border-radius:0;max-width:1280px}
 .you-universe-heading{display:flex;align-items:center;justify-content:space-between;gap:12px}.you-universe-heading h1{font-size:clamp(2rem,4cqw,3rem);margin:8px 0}.you-universe-heading .secondary{border-radius:30px;background:var(--glass)}
-.you-orbital .universe-canvas{width:100%;max-width:800px;height:clamp(780px,145cqw,1060px);margin:auto;display:block;padding:0}
+.you-orbital .universe-canvas{width:100%;max-width:none;margin:auto;display:block;padding:0}
 .you-orbital .universe-orbits{stroke:color-mix(in srgb,var(--action) 30%,transparent);stroke-dasharray:4 5;stroke-width:.8;opacity:.8}.universe-orbits circle{fill:var(--action);stroke:none;opacity:.45}
 .you-orbital .interest-node{width:clamp(96px,27cqw,156px);height:clamp(96px,27cqw,156px);border-radius:50%;padding:10px 7px;gap:7px;border:2px solid color-mix(in srgb,var(--surface-elevated) 85%,transparent);background:radial-gradient(circle at 30% 20%,var(--surface-elevated),transparent 70%),radial-gradient(circle at 55% 65%,color-mix(in srgb,var(--ink) 23%,var(--surface-elevated)),var(--glass));box-shadow:inset 0 0 18px color-mix(in srgb,var(--surface-elevated) 75%,transparent),0 10px 26px color-mix(in srgb,var(--ink) 13%,transparent);transform:translate(-50%,-50%)}
 .you-orbital .interest-node.affinity-love{width:clamp(102px,30cqw,174px);height:clamp(102px,30cqw,174px)}
@@ -13,7 +13,15 @@
 .you-orbital .interest-node.long-name strong{font-size:clamp(.625rem,2.2cqw,.85rem)}.you-orbital .interest-node.long-name>svg{width:22px;height:22px}
 .you-orbital .profile-node{left:50%;top:52%;width:clamp(146px,43cqw,240px);height:clamp(164px,48cqw,260px);border-radius:50%;border:4px solid var(--surface-elevated);gap:3px;background:radial-gradient(circle at 40% 30%,color-mix(in srgb,var(--brand-primary) 15%,var(--surface-elevated)),var(--surface-elevated));box-shadow:0 0 0 8px color-mix(in srgb,var(--surface-elevated) 35%,transparent),0 0 35px color-mix(in srgb,var(--action) 24%,transparent)}
 .illustrated-avatar{width:65%;height:auto;min-height:0;flex-shrink:1;max-height:66%;border-radius:50%}.you-orbital .profile-node>strong{font-size:clamp(1rem,3cqw,1.4rem)}.you-orbital .profile-node>span:last-child{background:var(--pill);padding:3px 9px;border-radius:20px;font-size:clamp(.7rem,2.4cqw,.85rem)}
-.you-universe-actions{display:flex;gap:12px;max-width:800px;margin:22px auto 12px}.you-universe-actions>*{flex:1;justify-content:center;min-height:72px;border:1px solid var(--border);border-radius:24px;background:var(--glass);font-size:clamp(.75rem,2.8cqw,1rem);padding:10px;gap:8px}.you-universe-actions>* svg:first-child{color:var(--action);flex-shrink:0}.you-universe-actions>* svg:last-child{width:14px;flex-shrink:0}.you-universe-count{text-align:center;margin:14px 0 24px}.you-expanded .universe-canvas+.universe-canvas{border-top:1px dashed var(--border)}
+.you-universe-actions{display:flex;gap:12px;max-width:none;margin:22px auto 12px}.you-universe-actions>*{flex:1;justify-content:center;min-height:72px;border:1px solid var(--border);border-radius:24px;background:var(--glass);font-size:clamp(.75rem,2.8cqw,1rem);padding:10px;gap:8px}.you-universe-actions>* svg:first-child{color:var(--action);flex-shrink:0}.you-universe-actions>* svg:last-child{width:14px;flex-shrink:0}.you-universe-count{text-align:center;margin:14px 0 24px}.you-expanded .universe-canvas+.universe-canvas{border-top:1px dashed var(--border)}
 @media(prefers-contrast:more),(prefers-reduced-transparency:reduce){.you-orbital .interest-node,.you-orbital .profile-node{background:var(--surface-elevated);border-color:var(--text-secondary);box-shadow:none}.you-orbital .universe-orbits{opacity:.3}}
 @media(forced-colors:active){.you-orbital .interest-node,.you-orbital .profile-node{background:Canvas;border-color:CanvasText;color:CanvasText;box-shadow:none}}
 .you-orbital .interest-node.long-name{width:clamp(112px,30cqw,174px);height:clamp(112px,30cqw,174px);padding:5px;gap:4px}
+
+.you-orbital .interest-node,.you-orbital .interest-node.affinity-love,.you-orbital .interest-node.long-name{width:var(--node-diameter);height:var(--node-diameter)}
+.you-orbital .profile-node{width:var(--profile-diameter);height:var(--profile-diameter)}
+.you-orbital .interest-node strong{font-size:clamp(.75rem,1.5cqw,1rem)}
+.you-orbital .interest-node.long-name strong{font-size:.6875rem}
+.you-orbital .interest-node>svg{width:clamp(25px,4cqw,40px);height:clamp(25px,4cqw,40px)}
+.you-orbital .interest-node.long-name>svg{width:22px;height:22px}
+.you-orbital .universe-canvas{background:radial-gradient(ellipse at center,color-mix(in srgb,var(--brand-violet) 8%,transparent),transparent 68%)}
