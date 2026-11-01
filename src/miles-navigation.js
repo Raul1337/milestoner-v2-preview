@@ -1,6 +1,6 @@
 // URL/history state only. Demo records and localStorage are deliberately not involved.
 export const MILES_ENTRY='milestonerMilesOverlay';
-export function backgroundRoute(value){return /^(home|discover|progress|you|agenda(?:\/\d{4}-\d{2}-\d{2}(?:\/[A-Za-z0-9-]+)?)?|project\/[A-Za-z0-9-]+)$/.test(value||'')?value:'home'}
+export function backgroundRoute(value){return /^(home|discover|progress|you(?:\/(?:profile|settings|edit|expanded|interest\/[A-Za-z0-9-]+))?|agenda(?:\/\d{4}-\d{2}-\d{2}(?:\/[A-Za-z0-9-]+)?)?|project\/[A-Za-z0-9-]+)$/.test(value||'')?value:'home'}
 export function navigationView(location,history){const hash=location.hash.slice(1);return hash==='miles'?{route:backgroundRoute(history.state?.[MILES_ENTRY]?.background),open:true}:{route:hash||'home',open:false}}
 export function createMilesNavigation(win,onChange,requestDiscard){
  let view=navigationView(win.location,win.history),closing=false,afterClose=null;

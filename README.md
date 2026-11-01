@@ -75,6 +75,18 @@ A saved project with a matching normalized title and category is identified on t
 
 Pending owner UX acceptance: the catalog, editorial card presentation and explicit duplicate-aware proposal wording. Future personalization and stronger idea/project association require separate decisions; neither is implied here.
 
+## You — Interest Universe V2.5B.1
+
+You opens directly into a deterministic map of twelve fictional confirmed interests. The central Alex Rivera user node opens Profile; Profile links to General Settings. Interest nodes open detail with explicit affinity/note editing and confirmed removal. Edit Universe supports custom confirmed interests and proposal review. Normal presentation keeps the first twelve confirmed interests in their saved order; expanded presentation adds room and access to all additional interests. On compact workspaces the map reflows into readable paired bubbles around the profile anchor, with page scrolling and no hidden interests among the first twelve.
+
+Affinity choices are Love it / Like it / Curious / Not really; text and icons accompany accents. Changing affinity does not reorder or resize a node. Two clearly separate synthetic suggestions are not inferred from projects or AI. Explicit Add confirms one; Not really declines it without adding a node. Decisions persist and do not automatically revive. Interest changes never create goals, project activity or calendar records.
+
+The additive key `milestoner-vision-v2-interest-universe-v1` holds only current demo interests and suggestion decisions. Existing application keys/records are unchanged. Storage denial falls back to page memory. The existing application reset retains this isolated Universe; interests remain explicitly managed through Edit Universe. This is not native inference/history/Sync architecture.
+
+Profile is private by default with fictional identity and a labeled fictional since date, no sharing or publishing flow. Consistency, level, active/completed milestone counts, Top Domains and badges show honest unavailable states rather than invented calculations. Recent Highlights are actual saved synthetic entry labels, not achievements. My Milestones opens the existing Your Life projects, with that demo distinction stated. General Settings retains assistance modes, language, context/privacy controls and existing reset confirmation. No theme choices are activated.
+
+Native references were inspected read-only; no private source, full documents or native implementation were copied. This is the first visual candidate: orbit composition, bubble sizing and expanded treatment remain for owner review. It is not final visual acceptance. No physics, continuous motion, zoom/pan engine, authentication or new primary navigation was added.
+
 ## Storage and privacy
 
 Each browser/origin has its own state; there is no synchronization. Existing keys remain compatible: `milestoner-vision-v2-demo-v1`, `milestoner-vision-v2-sidebar-expanded-v1`, and `milestoner-demo-insight-review-v1`. No migration or automatic revival of previously consumed suggestions. If storage is blocked the demo falls back to page memory.
