@@ -46,3 +46,18 @@ test('confirmation closes once and explicit follow-up navigation runs once',()=>
  const b=browser(),views=[];let count=0;const nav=createMilesNavigation(b.win,v=>views.push(v),a=>a());nav.open();nav.close(()=>{count++;b.hash('project/new-plan')});
  assert.equal(count,1);assert.equal(b.win.location.hash,'#project/new-plan');assert.deepEqual(views.at(-1),{route:'project/new-plan',open:false});nav.destroy();
 });
+test('dedicated profile editor has its own route and dirty navigation protection without overwriting Edit Universe',()=>{
+ assert.equal(backgroundRoute('you/profile/edit'),'you/profile/edit');assert.equal(backgroundRoute('you/edit'),'you/edit');assert.equal(backgroundRoute('you/profile/edit/other'),'home');
+ const b=browser('you/profile'),views=[];let dirty=true,pending,requests=0;
+ const nav=createMilesNavigation(b.win,v=>views.push(v),a=>a(),()=>({isDirty:()=>dirty,request:a=>{pending=a;requests++}}));
+ b.hash('you/profile/edit');b.win.history.back();assert.equal(b.win.location.hash,'#you/profile/edit');assert.equal(views.at(-1).route,'you/profile/edit');assert.equal(requests,1);
+ // Keep editing does not invoke the pending action. Explicit discard alone resumes it.
+ b.hash('you');assert.equal(b.win.location.hash,'#you/profile/edit');dirty=false;pending();assert.equal(b.win.location.hash,'#you');assert.equal(views.at(-1).route,'you');
+ b.win.history.back();assert.equal(views.at(-1).route,'you/profile/edit');b.win.history.forward();assert.equal(views.at(-1).route,'you');nav.destroy();
+});
+test('Miles can open and return over a dirty profile draft without consuming it or requesting discard',()=>{
+ const b=browser('you/profile/edit'),views=[];let requests=0;
+ const nav=createMilesNavigation(b.win,v=>views.push(v),a=>a(),()=>({isDirty:()=>true,request:()=>requests++}));
+ nav.open();assert.deepEqual(views.at(-1),{route:'you/profile/edit',open:true});nav.close();assert.deepEqual(views.at(-1),{route:'you/profile/edit',open:false});assert.equal(requests,0);
+ b.win.history.forward();assert.equal(views.at(-1).route,'you/profile/edit');assert.equal(views.at(-1).open,true);nav.close();assert.equal(requests,0);nav.destroy();
+});

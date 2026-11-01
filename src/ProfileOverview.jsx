@@ -1,13 +1,15 @@
 import React from 'react';
-import {ArrowLeft,Settings,ChevronRight,Zap,ChartNoAxesColumnIncreasing,Flag,Clock,Compass,Award,Plane,BookOpen,Footprints,Wallet} from 'lucide-react';
+import {ArrowLeft,Settings,Pencil,ChevronRight,Zap,ChartNoAxesColumnIncreasing,Flag,Clock,Compass,Award,Plane,BookOpen,Footprints,Wallet} from 'lucide-react';
 import {useLanguage} from './language';
 import IllustratedAvatar from './IllustratedAvatar';
-import {DEMO_PROFILE,profileActivity} from './profile-overview-model';
+import {profileActivity} from './profile-overview-model';
 import {domainStyle} from './PlanSummary';
 import './profile-overview.css';
+import {useDemoProfile,ProfileSaveStatus} from './DemoProfile';
 
 const activityIcons={travel:Plane,learning:BookOpen,fitness:Footprints,finance:Wallet};
 export default function ProfileOverview({state,headingRef,onOpenProject}){
+ const {profile}=useDemoProfile();
  const {language,content,dateLabel}=useLanguage(),L=(es,en)=>language==='en'?en:es,rows=profileActivity(state);
  const statistics=[{Icon:Zap,label:L('Consistencia','Consistency'),tone:'fitness'},{Icon:ChartNoAxesColumnIncreasing,label:L('Nivel','Level'),tone:'learning'},{Icon:Flag,label:L('Hitos completados','Completed milestones'),tone:'travel'},{Icon:Clock,label:L('Hitos activos','Active milestones'),tone:'warm'}];
  return <div className="profile-overview">
@@ -16,11 +18,12 @@ export default function ProfileOverview({state,headingRef,onOpenProject}){
    <h1 ref={headingRef} tabIndex={-1}>{L('Perfil','Profile')}</h1>
    <a href="#you/settings" className="profile-icon-link" aria-label={L('Ajustes generales','General Settings')}><Settings size={20}/></a>
   </header>
-  <div className="profile-layout">
+  <ProfileSaveStatus/><div className="profile-layout">
    <div className="profile-identity">
     <section className="profile-hero" aria-label={L('Identidad ficticia','Fictional identity')}>
-     <div className="profile-portrait"><IllustratedAvatar/></div>
-     <h2>{DEMO_PROFILE.name}</h2><p className="profile-handle">{DEMO_PROFILE.handle}</p>
+     <div className="profile-portrait"><IllustratedAvatar appearance={profile.avatar}/></div>
+     <h2>{profile.displayName}</h2>{profile.username&&<p className="profile-handle">@{profile.username}</p>}{profile.bio&&<p className="profile-bio">{profile.bio}</p>}
+     <a className="profile-edit-link" href="#you/profile/edit"><Pencil size={16} aria-hidden="true"/>{L('Editar perfil','Edit Profile')}</a>
      <p className="profile-private">{L('Perfil privado · identidad ficticia','Private profile · fictional identity')}</p>
     </section>
     <dl className="profile-statistics" aria-label={L('Estadísticas del perfil','Profile statistics')} aria-describedby="profile-statistics-note">
