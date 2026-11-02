@@ -11,7 +11,7 @@ export function FirstExampleSummary({first,language,compact=false}){
   <div className="first-example-identity"><span><Icon size={22} aria-hidden="true"/></span><div><small>{first.confirmed?L('Confirmado en esta sesión','Confirmed in this session'):L('Borrador · por confirmar','Draft · awaiting confirmation')}</small><h2><bdi dir="auto">{value.title}</bdi></h2></div></div>
   {category&&<span className="first-example-category">{category[language]}</span>}
   {!compact&&value.note.trim()&&<p className="first-example-note"><bdi dir="auto">{value.note}</bdi></p>}
-  {!compact&&<p className="first-example-boundary">{L('Ejemplo de intención · sin seguimiento, fechas ni progreso configurados.','An intention example · tracking, dates and progress are not configured.')}</p>}
+
  </article>;
 }
 export default function FirstMilestone({draft,step,language,update,go,onContinueLocally}){
@@ -31,20 +31,20 @@ export default function FirstMilestone({draft,step,language,update,go,onContinue
   <footer className="onboarding-actions"><button className="text-button" onClick={()=>go('review')}><ArrowLeft size={17}/>{L('Revisar ejemplo','Review example')}</button><div className="first-account-choice"><button className="primary" onClick={onContinueLocally}>{L('Continuar localmente','Continue locally')}<ArrowRight size={18}/></button><a className="secondary" href={accountReviewLinks(import.meta.env.BASE_URL,language,new URLSearchParams(location.search).get('appearance')).account}>{L('Explorar Cuenta · simulación','Explore Account · simulation')}</a></div></footer>
  </div>;
  if(step==='review'||first.confirmed)return <div className="first-review">
-  <p className="onboarding-lead">{first.confirmed?L('Esta confirmación temporal se conserva. Volver o recargar no crea otro ejemplo.','This temporary confirmation is retained. Going back or reloading does not create another example.'):L('Revisa tus palabras. Sólo se confirmará este ejemplo cuando tú lo decidas.','Review your own words. This example is only confirmed when you decide.')}</p>
+  {first.confirmed&&<p className="onboarding-lead">{L('Esta confirmación temporal se conserva. Volver o recargar no crea otro ejemplo.','This temporary confirmation is retained. Going back or reloading does not create another example.')}</p>}
   <FirstExampleSummary first={first} language={language}/>
   <p className="first-review-disclosure">{L('Al confirmar, el ejemplo permanecerá sólo en esta pestaña. No se añadirá a tus proyectos ni a la app nativa.','Once confirmed, the example stays in this tab only. It is not added to your projects or the native app.')}</p>
   {!first.confirmed&&<div className="first-review-edit"><button className="text-button" onClick={()=>go('milestone','first-title')}><Pencil size={16}/>{L('Editar detalles','Edit details')}</button><button className="text-button" onClick={()=>go('milestone')}>{L('Cancelar revisión','Cancel review')}</button></div>}
   <footer className="onboarding-actions"><button className="text-button" onClick={()=>go(first.confirmed?'universe':'milestone')}><ArrowLeft size={17}/>{L('Atrás','Back')}</button><button className="primary" onClick={first.confirmed?()=>go('account'):confirm}>{first.confirmed?L('Continuar','Continue'):L('Confirmar ejemplo','Confirm example')}<ArrowRight size={18}/></button></footer>
  </div>;
  return <div className="first-milestone-composition">
-  <div className="onboarding-guide first-guide"><MPlus/><div><strong>{L('Una idea tuya. Un primer paso.','Your idea. A first step.')}</strong><p>{L('Tú pones la intención. Le damos un espacio para revisarla.','You bring the intention. We give it a space for review.')}</p></div></div>
-  <p className="first-scope-note">{L('Esta demo te permite preparar una intención. Sólo vive en esta revisión, sin IA ni seguimiento real. Usa un ejemplo ficticio.','This demo lets you prepare an intention. It stays in this review, without AI or real tracking. Use a fictional example.')}</p>
+  <div className="onboarding-guide first-guide"><MPlus/><div><strong>{L('Una idea tuya. Un primer paso.','Your idea. A first step.')}</strong></div></div>
+  <p className="first-scope-note">{L('Prepara un ejemplo ficticio.','Prepare a fictional example.')}</p>
   {first.mode==='idea'?<form id="first-idea-form" className="first-composer" onSubmit={manual} noValidate>
    <label htmlFor="first-idea">{L('¿Qué te gustaría lograr, probar o aprender?','What would you like to accomplish, try or learn?')}</label>
    <textarea id="first-idea" value={first.idea} maxLength={240} onChange={e=>edit({idea:e.target.value})} rows={3} placeholder={L('Una idea, con tus propias palabras…','An idea, in your own words…')} aria-invalid={!!errors.idea} aria-describedby={errors.idea?'first-idea-error':'first-idea-note'} dir="auto"/>
    {errors.idea&&<p id="first-idea-error" role="alert">{L('Escribe una idea o usa la alternativa manual.','Write an idea or use the manual alternative.')}</p>}
-   <p id="first-idea-note">{L('Conservaremos tus palabras. No se deduce una meta de tus intereses.','We keep your words. No milestone is derived from your interests.')}</p>
+   <p id="first-idea-note">{L('Conservamos tus palabras, sin generar sugerencias.','We keep your words without generating suggestions.')}</p>
    <div className="first-composer-actions"><button type="button" className="text-button" onClick={()=>manual()}><FilePenLine size={16}/>{L('Prefiero crear manualmente','I prefer to create manually')}</button><button type="submit" className="primary">{L('Dar forma a mi idea','Shape my idea')}<ArrowRight size={18}/></button></div>
   </form>:<form id="first-manual-form" className="first-manual-form" onSubmit={review} noValidate>
    <label htmlFor="first-title">{L('Nombre de tu primera meta','Your first milestone name')}</label><textarea required id="first-title" value={first.title} rows={2} maxLength={240} onChange={e=>edit({title:e.target.value})} aria-invalid={!!errors.title} aria-describedby={errors.title?'first-title-error':undefined} dir="auto"/>

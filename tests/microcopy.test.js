@@ -14,6 +14,9 @@ const bundled=await build({stdin:{resolveDir:process.cwd(),loader:'jsx',contents
  import {LanguageProvider} from './src/language.jsx';
  import {DemoProfileProvider} from './src/DemoProfile.jsx';
  import {Onboarding} from './src/onboarding/main.jsx';
+ import {AccountReview,AssociationConfirmation} from './src/account/main.jsx';
+ import DemoDisclosure from './src/DemoDisclosure.jsx';
+ import ContextualInfo from './src/ContextualInfo.jsx';
  import Discover from './src/Discover.jsx';
  import YouExperience from './src/YouExperience.jsx';
  import ProjectDetails from './src/ProjectDetails.jsx';
@@ -26,11 +29,11 @@ const bundled=await build({stdin:{resolveDir:process.cwd(),loader:'jsx',contents
   const keys=['location','sessionStorage','localStorage','matchMedia'],descriptors=keys.map(k=>Object.getOwnPropertyDescriptor(globalThis,k));
   const state=initial(),before=JSON.stringify(state),noop=()=>{};
   Object.defineProperty(globalThis,'matchMedia',{configurable:true,value:()=>({matches:false})});
-  Object.defineProperty(globalThis,'location',{configurable:true,value:{search:'?lang='+language,hash:'#'+draft.step}});
+  Object.defineProperty(globalThis,'location',{configurable:true,value:{search:'?lang='+language+(screen==='account'?'&scenario=signed-out':''),hash:'#'+draft.step}});
   Object.defineProperty(globalThis,'sessionStorage',{configurable:true,value:{getItem:()=>JSON.stringify(draft),setItem(){throw Error('SSR must not write storage')}}});
   Object.defineProperty(globalThis,'localStorage',{configurable:true,value:{getItem:()=>null,setItem(){throw Error('SSR must not write storage')}}});
   try{
-   const content=screen==='onboarding'?<Onboarding/>:screen==='discover'?<Discover projects={state.projects} onExplore={noop} onProject={noop}/>:screen==='universe'||screen==='interest'||screen==='suggestion'?<DemoProfileProvider><YouExperience route={screen==='universe'?'you':screen==='interest'?'you/interest/photography':'you/interest/suggest-astronomy'} appState={state} navigationGuard={{current:null}} onOpenProject={noop}/></DemoProfileProvider>:screen==='project'?<ProjectDetails p={state.projects[0]} state={state}/>:screen==='plan'?<PlanSummary value={{...proposal('french',language==='en'),date:'2027-04-10',milestone:'B1'}} onChange={noop}/>:screen==='first-review'?<FirstMilestone draft={draft} step="review" language={language}/>:<MilesCreation projects={state.projects}/>;
+   const content=screen==='info'?<ContextualInfo title={language==='es'?'Ayuda de prueba':'Example help'}><p>{language==='es'?'Explicación breve.':'A short explanation.'}</p></ContextualInfo>:screen.startsWith('disclosure-')?<DemoDisclosure scope={screen.slice(11)}/>:screen==='account'?<AccountReview/>:screen==='association-confirm'?<AssociationConfirmation state={{local:'sample-a'}} provider="Google" L={(es,en)=>language==='en'?en:es} onCancel={noop} onConfirm={noop}/>:screen==='onboarding'?<Onboarding/>:screen==='discover'?<Discover projects={state.projects} onExplore={noop} onProject={noop}/>:screen==='universe'||screen==='interest'||screen==='suggestion'?<DemoProfileProvider><YouExperience route={screen==='universe'?'you':screen==='interest'?'you/interest/photography':'you/interest/suggest-astronomy'} appState={state} navigationGuard={{current:null}} onOpenProject={noop}/></DemoProfileProvider>:screen==='project'?<ProjectDetails p={state.projects[0]} state={state}/>:screen==='plan'?<PlanSummary value={{...proposal('french',language==='en'),date:'2027-04-10',milestone:'B1'}} onChange={noop}/>:screen==='first-review'?<FirstMilestone draft={draft} step="review" language={language}/>:<MilesCreation projects={state.projects}/>;
    const html=renderToStaticMarkup(<LanguageProvider>{content}</LanguageProvider>);
    if(JSON.stringify(state)!==before)throw Error('Rendering changed demo records');
    return html;
@@ -39,7 +42,7 @@ const bundled=await build({stdin:{resolveDir:process.cwd(),loader:'jsx',contents
 `},bundle:true,platform:'node',format:'cjs',packages:'external',write:false,define:{'import.meta.env.BASE_URL':JSON.stringify('/milestoner-v2-preview/')},plugins:[{name:'review-render-only',setup(b){
  b.onResolve({filter:/\.css(?:\?raw)?$/},()=>({path:'empty-style',namespace:'review-style'}));
  b.onLoad({filter:/.*/,namespace:'review-style'},()=>({contents:'export default "";',loader:'js'}));
- b.onLoad({filter:/src\/onboarding\/main\.jsx$/},async args=>{const source=await readFile(args.path,'utf8'),mount=/^createRoot\(document.getElementById\('root'\)\)\.render\(.*\);$/m;assert.match(source,mount);return{contents:source.replace(mount,'export {Onboarding};'),loader:'jsx'}});
+ b.onLoad({filter:/src\/(onboarding|account)\/main\.jsx$/},async args=>{const source=await readFile(args.path,'utf8'),mount=/^createRoot\(document.getElementById\('root'\)\)\.render\(.*\);$/m;assert.match(source,mount);return{contents:source.replace(mount,args.path.includes('/onboarding/')?'export {Onboarding};':'export {AccountReview};'),loader:'jsx'}});
 }}]});
 const mod={exports:{}};new Function('require','module','exports',bundled.outputFiles[0].text)(createRequire(import.meta.url),mod,mod.exports);
 const render=(screen,language='es',draft=initialDraft())=>mod.exports.render(screen,language,draft);
@@ -49,7 +52,7 @@ test('welcome keeps brand, Miles, local-first action and isolated-prototype disc
   assert.match(html,language==='es'?/Haz espacio para lo que importa\./:/Make room for what matters\./);
   assert.match(html,language==='es'?/Con Miles, paso a paso\./:/With Miles, one step at a time\./);
   assert.match(html,language==='es'?/Empezar sin cuenta/:/Start without an account/);
-  assert.match(html,language==='es'?/Prototipo aislado, sin IA ni servicios conectados/:/Isolated prototype, without AI or connected services/);
+  assert.match(html,language==='es'?/Este prototipo aislado conserva el borrador/:/This isolated prototype keeps the draft/);
   assert.match(html,language==='es'?/Borrador temporal/:/Temporary draft/);
   assert.doesNotMatch(html,/Un espacio para lo que te mueve|A space for what moves you|Miles es una guía visual|Miles is a visual guide/);
  }
@@ -110,9 +113,54 @@ test('project and proposal dates expose their real 2027 year without changing ta
 test('M+ and first-example review retain action-specific honesty and explicit confirmation boundaries',()=>{
  const d={...initialDraft(),step:'review'};d.firstMilestone={...d.firstMilestone,title:'Ejemplo ficticio',category:'learning'};
  for(const language of ['es','en']){const miles=render('miles',language),review=render('first-review',language,d);
-  assert.match(miles,language==='es'?/Sin IA ni acciones externas/:/No AI or external actions/);
+  assert.match(miles,language==='es'?/Demo local · sin IA/:/Local demo · no AI/);
   assert.match(miles,language==='es'?/Nada se guarda sin confirmar/:/Nothing is saved until you confirm/);
   assert.match(review,language==='es'?/No se añadirá a tus proyectos ni a la app nativa/:/It is not added to your projects or the native app/);
   assert.match(review,language==='es'?/>Confirmar ejemplo</:/>Confirm example</);
+ }
+});
+
+
+test('contextual help declares a click-triggered native auto popover with complete relationships in both languages',()=>{
+ for(const language of ['es','en']){
+  const html=render('info',language),id=html.match(/popoverTarget="([^"]+)"/i)?.[1]||html.match(/popovertarget="([^"]+)"/i)?.[1];
+  assert.ok(id);assert.match(html,/type="button"/);assert.match(html,/popover="auto"/);assert.match(html,/aria-expanded="false"/);assert.match(html,/role="dialog" aria-modal="false"/);
+  assert.ok(html.includes('aria-controls="'+id+'"'));assert.ok(html.includes('aria-labelledby="'+id+'-title"'));assert.ok(html.includes('aria-describedby="'+id+'-body"'));
+  assert.match(html,/popovertargetaction="hide"/i);assert.doesNotMatch(html,/role="tooltip"/);
+  assert.match(html,language==='es'?/Información: Ayuda de prueba/:/Information: Example help/);assert.match(html,language==='es'?/Cerrar información/:/Close information/);
+ }
+});
+test('the three demo scopes keep browser-local data, temporary onboarding and simulated Account distinct',()=>{
+ for(const language of ['es','en']){
+  const app=render('disclosure-app',language),onboarding=render('disclosure-onboarding',language),account=render('disclosure-account',language);
+  assert.match(app,/data-demo-scope="app"/);assert.match(app,language==='es'?/este navegador al confirmarlos/:/this browser when you confirm/);
+  assert.match(onboarding,/data-demo-scope="onboarding"/);assert.match(onboarding,language==='es'?/sesión de esta pestaña/:/this tab’s session/);assert.match(onboarding,language==='es'?/No se aplica a tu perfil, intereses ni proyectos/:/not applied to your saved profile, interests or projects/);
+  assert.match(account,/data-demo-scope="account"/);assert.match(account,language==='es'?/sin abrir Apple o Google ni pedir credenciales/:/without opening Apple or Google or requesting credentials/);assert.match(account,language==='es'?/No hay conexión real, respaldo ni Sync/:/no real connection, backup or Sync/);
+  assert.notEqual(app,onboarding);assert.notEqual(onboarding,account);
+ }
+});
+test('provider simulations are explicit on each button and three independent statuses remain visible',()=>{
+ for(const language of ['es','en']){
+  const html=render('account',language);
+  assert.match(html,language==='es'?/>Continuar con Apple · simulación</:/>Continue with Apple · simulation</);
+  assert.match(html,language==='es'?/>Continuar con Google · simulación</:/>Continue with Google · simulation</);
+  assert.match(html,language==='es'?/>Inicio de sesión</:/>Sign-in</);assert.match(html,language==='es'?/>Asociación local</:/>Local association</);assert.match(html,/>Sync</);
+  assert.match(html,language==='es'?/Sesión cerrada/:/Signed out/);assert.match(html,language==='es'?/Asociación no comprobada/:/Association not checked/);assert.match(html,language==='es'?/No disponible en esta demo/:/Unavailable in this demo/);
+ }
+});
+test('association consequences remain ordinary visible confirmation content rather than hidden contextual help',()=>{
+ for(const language of ['es','en']){
+  const html=render('association-confirm',language),boundary=html.match(/<p class="account-confirm-boundary">([^<]+)<\/p>/)?.[1];
+  assert.ok(boundary);assert.doesNotMatch(html,/popover=/);
+  for(const term of language==='es'?['sube','mezcla','transfiere','reemplaza','restaura','sincroniza','titularidad histórica','Sync']:['upload','merge','transfer','replace','restore','synchronize','historical ownership','Sync'])assert.ok(boundary.includes(term),term);
+  assert.match(html,language==='es'?/Cancelar asociación/:/Cancel association/);assert.match(html,language==='es'?/Confirmar asociación simulada/:/Confirm simulated association/);
+ }
+});
+test('onboarding review keeps its exact temporary confirmation boundary outside contextual help',()=>{
+ for(const language of ['es','en']){
+  const d={...initialDraft(),step:'review'};d.firstMilestone={...d.firstMilestone,title:'Ejemplo ficticio',category:'learning'};
+  const html=render('first-review',language),boundary=html.match(/<p class="first-review-disclosure">([^<]+)<\/p>/)?.[1];
+  assert.ok(boundary);assert.match(boundary,language==='es'?/sólo en esta pestaña/:/this tab only/);assert.match(boundary,language==='es'?/No se añadirá a tus proyectos ni a la app nativa/:/not added to your projects or the native app/);
+  assert.match(html,language==='es'?/Confirmar ejemplo/:/Confirm example/);assert.match(html,language==='es'?/Cancelar revisión/:/Cancel review/);
  }
 });
