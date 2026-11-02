@@ -34,7 +34,7 @@ function AccountReview(){
   return()=>{navigation.current.destroy();window.removeEventListener('keydown',key);window.removeEventListener('pagehide',leaving);window.removeEventListener('pageshow',restore)};
  },[store]);
  useLayoutEffect(()=>{navigation.current?.reconcile()},[state]);
- useLayoutEffect(()=>{const frame=requestAnimationFrame(()=>{(nextFocus.current?document.getElementById(nextFocus.current):heading.current)?.focus({preventScroll:true});nextFocus.current=null;window.scrollTo({top:0,behavior:'instant'})});return()=>cancelAnimationFrame(frame)},[route]);
+ useLayoutEffect(()=>{const frame=requestAnimationFrame(()=>{if(nextFocus.current){document.getElementById(nextFocus.current)?.focus()}else{heading.current?.focus({preventScroll:true});window.scrollTo({top:0,behavior:'instant'})}nextFocus.current=null});return()=>cancelAnimationFrame(frame)},[route]);
  function go(next){navigation.current.go(next)}
  function signIn(value){apply(s=>startSignIn(s,value));go('provider')}
  function prepare(){apply(prepareAssociation);go('confirm')}
