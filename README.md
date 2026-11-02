@@ -109,6 +109,22 @@ All shows catalog examples; Featured (`#you/badges/featured`) shows an honest em
 
 Open product decisions: the meaning/classification of the proposed Milestones filter, future award conditions/provenance and the eligibility/limit/order of Featured selection. The unapproved filter is explained in the catalog disclosure rather than presented as a nonfunctional control. Counts describe illustrations only. Existing records never award badges. Badge art is a Web vector adaptation of the existing icon system, not the original mockup artwork. Review the current [public captures](https://raul1337.github.io/milestoner-v2-preview/review/) before acceptance.
 
+## First-use onboarding V2.5C.1 — isolated public candidate
+
+Status: **PENDING OWNER VISUAL AND FUNCTIONAL REVIEW**. [Open the interactive candidate](https://raul1337.github.io/milestoner-v2-preview/review/onboarding/?lang=es&appearance=light#welcome): Welcome → optional preferred name → interest selection → Universe reveal. The normal Home entry and every existing application experience remain unchanged. No provider login, account association, AI, project or milestone creation is implemented here.
+
+The separate review entry reuses existing public branding, M+, semantic tokens, the illustrated portrait and `universe-layout.js`/`you.css` geometry. No private artwork/source is added. A missing or whitespace-only name displays Tú/You, never the saved fictional default identity. The optional name has the existing Web-demo 50-character limit; it is not a new native rule. This slice omits activity discovery.
+
+The twelve authored interests start unselected. Choices are explicit and reversible, with no minimum. Every selected item starts as canonical `curious`, regardless of category or click order: an owner-authorized **Web onboarding candidate rule**, not a native affinity/inference contract. Catalog order gives a deterministic reveal; colors remain tied to existing authored interest roles. Zero choices show one central profile and an honest empty state. Normal mode shows up to eight; expansion shows all selections on one canvas with one avatar. Detail dialogs expose complete names where compact previews shorten them.
+
+Only `sessionStorage` key `milestoner-vision-v2-onboarding-review-v1` holds the draft name, selections and last step. It never reads or writes saved application/Profile/Universe state. Hash history supports Next/Back/Forward; reload retains an available session draft. Finish opens a review conclusion and keeps that temporary draft; it does not complete onboarding in the main app. Reset and explicit Exit offer discard confirmation for entered data. Exit discards only this draft and returns to the normal app. Closing a confirmation or pressing Escape keeps it. Leaving through browser history does not itself discard the session draft.
+
+Session storage follows browser tab/session rules and may be copied or restored by browser tab restoration. It is not durable storage or Sync. Denied writes fall back to page memory with a reload-loss warning. Failed clearing is disclosed; Exit anyway remains explicit if the browser cannot delete its own draft. No other keys are cleared. Use fictional names only.
+
+Language and appearance controls are URL-scoped. Isolated accessibility review controls support 100/150/200% text and reduced motion without changing app preferences. Example: [`?lang=en&appearance=dark&text=200&motion=reduce#interests`](https://raul1337.github.io/milestoner-v2-preview/review/onboarding/?lang=en&appearance=dark&text=200&motion=reduce#interests). Direct Universe links show only the current tab draft, including an empty state in a fresh session. [Current review captures](https://raul1337.github.io/milestoner-v2-preview/review/) show representative viewports; scroll the live candidate for all controls/content.
+
+V2.5C.2 remains separate: first confirmed milestone semantics, account invitation and continued local use. Publication of this candidate does not accept its visual/functional design or authorize native implementation.
+
 ## Storage and privacy
 
 Each browser/origin has its own state; there is no synchronization. Existing keys remain compatible: `milestoner-vision-v2-demo-v1`, `milestoner-vision-v2-sidebar-expanded-v1`, and `milestoner-demo-insight-review-v1`. No migration or automatic revival of previously consumed suggestions. If storage is blocked the demo falls back to page memory.
