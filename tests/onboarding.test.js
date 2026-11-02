@@ -24,7 +24,7 @@ test('optional name and empty interests use a neutral identity without fictional
 });
 test('explicit selections are reversible and every interest starts Curious independently of category and click order',()=>{
  let a=initialDraft(),b=initialDraft();for(const i of INTEREST_CATALOG)a=toggleSelection(a,i.id);for(const i of [...INTEREST_CATALOG].reverse())b=toggleSelection(b,i.id);
- assert.deepEqual(a.selected,b.selected);assert.equal(draftInterests(a).length,12);
+ assert.deepEqual(a.selected,b.selected);assert.equal(draftInterests(a).length,35);
  assert.ok(draftInterests(a).every(i=>i.affinity==='curious'&&i.note===''));
  assert.deepEqual(INTEREST_CATALOG.map(i=>i.name),draftInterests(a).map(i=>i.name));
  for(const i of INTEREST_CATALOG)a=toggleSelection(a,i.id);assert.deepEqual(a.selected,[]);
