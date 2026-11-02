@@ -7,7 +7,8 @@ import CompactDialog from './CompactDialog';
 import {projectEntries,detailMetric,activityPatch,detailsPatch,detailContext} from './project-detail-model';
 
 export default function ProjectDetails({p,state,onPatch,onToggle,onMiles,onProgress,onLog,onEvent,onEditEvent,onAgenda,onRemoveEvent}){
- const {language,t,content,number,dateLabel}=useLanguage(),en=language==='en',L=(es,eng)=>en?eng:es;
+ const {language,t,content,number,dateLabel:shortDateLabel}=useLanguage(),en=language==='en',L=(es,eng)=>en?eng:es;
+ const dateLabel=value=>shortDateLabel(value,true);
  const [tab,setTab]=useState('Overview'),[editor,setEditor]=useState(null),heading=useRef(),id=useId();
  const Icon=({travel:Plane,learning:BookOpen,fitness:Footprints,finance:Wallet})[p.domain]||Sparkles;
  const tasks=p.tasks||[],next=tasks.find(a=>!a.done),entries=projectEntries(state,p),metric=detailMetric(state,p),events=state.events.filter(e=>e.project===p.id);

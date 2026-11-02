@@ -159,6 +159,18 @@ A free-flow URL has no `scenario` parameter. Optional deterministic `?scenario=s
 
 **Remaining decisions/limits:** owner visual and functional acceptance; final production wording/timing and recovery/support paths require their own review. This candidate implements no real OAuth/enrollment/Sync or native security verification. Real Apple authentication, two-account isolation, expired JWT and release/device gates remain separate native tasks. Physical keyboard/browser-session restoration and spoken-screen-reader certification are not claimed. No V2.6 work is included.
 
+## Microcopy V2.6.1a — public review candidate
+
+Status: **PENDING OWNER VISUAL AND FUNCTIONAL REVIEW**. [Current before/after review](https://raul1337.github.io/milestoner-v2-preview/review/) compares six real rendered states against `cbb3868`: Welcome, interest selection, Discover, Miles proposal, Universe and project dates. This editorial slice does not accept previously pending candidates.
+
+Welcome keeps its brand headline, Miles guidance, Start without an account and a local isolated-prototype disclosure, with fewer introductory paragraphs. Optional name keeps the same input, limits, neutral You/Tú fallback, skip and draft behavior. Interest selection uses “¿Qué te interesa? / What interests you?”, a brief future benefit and an explicit current no-personalization/no-AI statement; starting affinity remains explained in existing contextual details. Capsules, catalog, custom IDs and geometry are unchanged.
+
+Discover no longer suggests saving/bookmarking ideas. Its editable proposal and M+ use plain example/manual language. Descriptive B1, unscheduled activities and explicit Project confirmation retain their existing meaning. You labels its existing edit route “Editar intereses / Edit interests”; only pending-suggestion decline controls say “Descartar sugerencia / Dismiss suggestion”. The canonical No mucho / Not really affinity is unchanged. Two text-wrapping guards keep the new heading/action readable at enlarged text without changing orbital rules, dimensions or typography scales.
+
+Project Details and PlanSummary explicitly include the year from the stored date using existing locale formatting. Other date consumers keep the original short-date default, including Home/Agenda/Progress formatting and reminder year suffixes. No values, scheduling, progress calculations, confirmation, storage or navigation contracts change.
+
+**Intentionally deferred:** global demo-disclosure centralization (V2.6.1b), Profile/Badges compaction (V2.6.1c), Account integration and recovery redesign, broader Progress/Project copy changes and native handoff decisions. Account, Profile, Badges, Home layout, design tokens, CSS, models and navigation controllers are unchanged. Theme Playground keeps its palettes, settings, isolation and geometry; its shared M+ components inherit only the editorial/date presentation changes. No native/private references are published and no V2.6.1b implementation is included.
+
 ## Storage and privacy
 
 Each browser/origin has its own state; there is no synchronization. Existing keys remain compatible: `milestoner-vision-v2-demo-v1`, `milestoner-vision-v2-sidebar-expanded-v1`, and `milestoner-demo-insight-review-v1`. No migration or automatic revival of previously consumed suggestions. If storage is blocked the demo falls back to page memory.
