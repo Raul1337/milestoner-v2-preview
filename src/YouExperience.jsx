@@ -8,6 +8,7 @@ import IllustratedAvatar from './IllustratedAvatar';
 import ProfileOverview from './ProfileOverview';
 import {useDemoProfile} from './DemoProfile';
 import EditProfile from './EditProfile';
+import Badges from './Badges';
 import {AFFINITIES,interestLabel,readInterests,saveInterests,changeInterest} from './interest-model';
 import './you.css';
 import {universeLayout,affinityDiameter} from './universe-layout';
@@ -34,6 +35,7 @@ export default function YouExperience({route,appState,onOpenProject,navigationGu
  function bubble(i,index){const Icon=iconMap[i.id]||Sparkles,slot=layout.nodes[index],label=interestLabel(i,language);return <button key={i.id} className={'interest-node affinity-'+i.affinity+(label.length>24?' long-name':'')+(!/\s/.test(label)?' single-word':'')} style={{...domainStyle(palettes[universe.confirmed.indexOf(i)%12]),'--node-x':slot.x+'px','--node-y':slot.y+'px','--node-diameter':affinityDiameter(i.affinity,layout.max,layout.compact)+'px'}} aria-label={`${label} · ${L('Confirmado','Confirmed')} · ${affinityLabel(i.affinity)}`} title={label} onClick={()=>location.hash='you/interest/'+i.id}><Icon size={42} aria-hidden="true"/><strong>{label}</strong></button>}
  function orbit(items){return <div className="universe-canvas" ref={stage} style={{height:layout.height,'--profile-diameter':layout.profile+'px','--profile-y':layout.cy+'px'}} aria-label={L('Mapa de intereses confirmados','Confirmed interest map')}><svg className="universe-orbits" viewBox={`0 0 ${layout.width} ${layout.height}`} aria-hidden="true">{[.72,1].map(scale=><ellipse key={scale} cx={layout.cx} cy={layout.cy} rx={layout.rx*scale} ry={layout.ry*scale}/>)}{[.25,.75].map(t=><circle key={t} cx={layout.width*t} cy={layout.height*(t===.25?.23:.77)} r="4"/>)}</svg><a className="profile-node" href="#you/profile" aria-label={`${identity.displayName} · ${L('usuario ficticio · Ver perfil','fictional user · View Profile')}`}><IllustratedAvatar appearance={identity.avatar}/><strong className="profile-node-name" title={identity.displayName}>{identity.displayName}</strong><span>{L('Ver perfil','View Profile')}<ArrowUpRight size={13}/></span></a>{items.map(bubble)}</div>}
  if(route==='you/settings')return null;
+ if(route==='you/badges'||route==='you/badges/featured')return <article className="you-page"><Badges route={route} headingRef={heading}/></article>;
  if(route==='you/profile/edit')return <EditProfile headingRef={heading} navigationGuard={navigationGuard}/>;
  const profile=route==='you/profile';
  return <article className={'you-page'+(expanded?' you-expanded':'')+(!profile&&!interestId?' you-orbital':'')}>

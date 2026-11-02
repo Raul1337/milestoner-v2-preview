@@ -61,3 +61,16 @@ test('Miles can open and return over a dirty profile draft without consuming it 
  nav.open();assert.deepEqual(views.at(-1),{route:'you/profile/edit',open:true});nav.close();assert.deepEqual(views.at(-1),{route:'you/profile/edit',open:false});assert.equal(requests,0);
  b.win.history.forward();assert.equal(views.at(-1).route,'you/profile/edit');assert.equal(views.at(-1).open,true);nav.close();assert.equal(requests,0);nav.destroy();
 });
+test('Badges and Featured retain their route through Miles, reload, Back and Forward without storage access',()=>{
+ for(const route of ['you/badges','you/badges/featured']){
+  assert.equal(backgroundRoute(route),route);
+  const b=browser('you/profile'),views=[];let nav=createMilesNavigation(b.win,v=>views.push(v),a=>a());
+  b.hash(route);nav.open();assert.deepEqual(views.at(-1),{route,open:true});
+  nav.destroy();nav=createMilesNavigation(b.win,v=>views.push(v),a=>a());
+  assert.deepEqual(navigationView(b.win.location,b.win.history),{route,open:true});
+  nav.close();assert.deepEqual(views.at(-1),{route,open:false});
+  b.win.history.back();assert.equal(views.at(-1).route,'you/profile');
+  b.win.history.forward();assert.equal(views.at(-1).route,route);nav.destroy();
+ }
+ assert.equal(backgroundRoute('you/badges/manage'),'home');
+});

@@ -61,7 +61,7 @@ function App() {
   useEffect(() => {setStorage(saveDemo(state));}, [state]);
   useEffect(() => {if (draft) {const panel = document.querySelector('.proposal');panel?.scrollIntoView({ block: 'start', behavior: 'instant' });panel?.focus();}}, [!!draft]);
   useEffect(() => {if (!toast) return;const _entry = setTimeout(() => setToast(''), 4000);return () => clearTimeout(_entry);}, [toast]);
-  const update = (fn) => setState((s) => fn(s));const notify = (_entry2) => setToast(_entry2);const go = (r) => {if(r==='miles')showMiles();else location.hash=r;};const project = state.projects.find((p) => route === `project/${p.id}`);const isYou=/^you(?:\/(?:profile(?:\/edit)?|settings|edit|expanded|interest\/[A-Za-z0-9-]+))?$/.test(route);const active = isYou?'you':project||(route==='agenda'||route.startsWith('agenda/')) ? 'home' : route;
+  const update = (fn) => setState((s) => fn(s));const notify = (_entry2) => setToast(_entry2);const go = (r) => {if(r==='miles')showMiles();else location.hash=r;};const project = state.projects.find((p) => route === `project/${p.id}`);const isYou=/^you(?:\/(?:profile(?:\/edit)?|badges(?:\/featured)?|settings|edit|expanded|interest\/[A-Za-z0-9-]+))?$/.test(route);const active = isYou?'you':project||(route==='agenda'||route.startsWith('agenda/')) ? 'home' : route;
   const patchProject = (id, patch) => update((s) => ({ ...s, projects: s.projects.map((p) => p.id === id ? { ...p, ...patch } : p) }));
   const openProject = (p) => {update((s) => ({ ...s, context: p.id }));go(`project/${p.id}`);};
   function taskToggle(p, _entry3) {patchProject(p.id, { tasks: p.tasks.map((x) => x.id === _entry3.id ? { ...x, done: !x.done } : x) });notify(_entry3.done ? 'Tarea reabierta' : 'Tarea completada en la demo');}
