@@ -47,10 +47,10 @@ test('view switching and search compose truthfully without changing selection or
  assert.equal(capsuleView(opts,d.selected,{selectedOnly:true,query:'cooking'}).visible.length,0);
  assert.deepEqual(d,snapshot);
 });
-test('expanded and filtered views are ephemeral, retaining the V2 draft and V1 compatibility without any storage write',()=>{
+test('expanded and filtered views are ephemeral, retaining the onboarding payload and V1 compatibility without any storage write',()=>{
  const previous={version:1,name:'Fictional',selected:['photography','hiking'],step:'interests'},upgraded=compatibleDraft(previous);
  let d=addCustomInterest(upgraded,'Cerámica ficticia',()=> 'custom-demo').draft;const raw=JSON.stringify(d),calls=[],data=new Map([[ONBOARDING_KEY,raw],['application','unchanged']]);
  const store=createOnboardingStore({getItem:k=>data.get(k),setItem:(k,v)=>{calls.push(k);data.set(k,v)}});d=store.read();
  for(const expanded of [false,true])for(const selectedOnly of [false,true])for(const query of ['', 'ceramica', 'reading'])capsuleView(draftOptions(d),d.selected,{expanded,selectedOnly,query});
- assert.deepEqual(calls,[]);assert.equal(data.get(ONBOARDING_KEY),raw);assert.equal(data.get('application'),'unchanged');assert.equal(d.version,2);assert.deepEqual(d,JSON.parse(raw));
+ assert.deepEqual(calls,[]);assert.equal(data.get(ONBOARDING_KEY),raw);assert.equal(data.get('application'),'unchanged');assert.equal(d.version,3);assert.deepEqual(d,JSON.parse(raw));
 });

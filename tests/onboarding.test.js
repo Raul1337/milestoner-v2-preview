@@ -50,7 +50,7 @@ test('corrupt or unsupported session storage never migrates saved data and block
 test('Back/Forward and reload restore the isolated step without consuming selections or touching Miles history',()=>{
  const s=storage(),store=createOnboardingStore(s),win=browser();let draft=initialDraft(),changes=0;
  const nav=createOnboardingNavigation(win,draft.step,step=>{draft={...draft,step};store.save(draft);changes++});
- assert.equal(win.location.hash,'#welcome');for(const step of STEPS.slice(1))nav.go(step);
+ assert.equal(win.location.hash,'#welcome');for(const step of ['information','interests','universe','finished'])nav.go(step);
  assert.equal(changes,4);win.history.back();assert.equal(draft.step,'universe');win.history.back();assert.equal(draft.step,'interests');win.history.forward();assert.equal(draft.step,'universe');
  nav.destroy();const before=win.location.hash,restored=createOnboardingStore(s).read();const next=createOnboardingNavigation(win,restored.step,()=>{});assert.equal(win.location.hash,before);assert.equal(win.history.state,null);next.destroy();
  const fresh=browser();createOnboardingNavigation(fresh,restored.step,()=>{}).destroy();assert.equal(fresh.location.hash,'#universe');

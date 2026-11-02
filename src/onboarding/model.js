@@ -1,12 +1,14 @@
+import {firstMilestoneDraft,validFirstMilestone,firstMilestoneMeaningful} from './first-milestone.js';
 import {INTEREST_CATALOG,LEGACY_IDS,normalizeInterest} from './catalog.js';
 export {INTEREST_CATALOG,interestLabel} from './catalog.js';
 
 // Keep the key for explicit, non-destructive V1 compatibility. Only payload version changes.
 export const ONBOARDING_KEY='milestoner-vision-v2-onboarding-review-v1';
 export const CUSTOM_INTEREST_LIMIT=60; // Unicode code points, never silently truncated.
-export const STEPS=Object.freeze(['welcome','information','interests','universe','finished']);
-export const initialDraft=()=>({version:2,name:'',selected:[],custom:[],step:'welcome'});
+export const STEPS=Object.freeze(['welcome','information','interests','universe','milestone','review','account','finished']);
+export const initialDraft=()=>({version:3,name:'',selected:[],custom:[],step:'welcome',firstMilestone:firstMilestoneDraft()});
 export function draftStep(value,fallback='welcome'){return STEPS.includes(value)?value:STEPS.includes(fallback)?fallback:'welcome'}
+const legacyStep=v=>['welcome','information','interests','universe','finished'].includes(v.step);
 const baseValid=v=>v&&typeof v.name==='string'&&v.name.length<=50&&!/[\u0000-\u001f\u007f]/.test(v.name)&&Array.isArray(v.selected)&&new Set(v.selected).size===v.selected.length&&STEPS.includes(v.step);
 export function customTextError(text){
  if(typeof text!=='string'||!text.trim()||!/[\p{L}\p{N}\p{P}\p{S}]/u.test(text))return 'empty';
@@ -14,15 +16,17 @@ export function customTextError(text){
  return [...text.trim()].length>CUSTOM_INTEREST_LIMIT?'length':null;
 }
 function knownDuplicate(custom,label){const normalized=normalizeInterest(label);return INTEREST_CATALOG.find(i=>Object.values(i.name).some(n=>normalizeInterest(n)===normalized))||custom.find(i=>normalizeInterest(i.label)===normalized)}
-export function validDraft(v){
- if(!baseValid(v)||v.version!==2||!Array.isArray(v.custom))return false;
+function validInterestDraft(v){
+ if(!baseValid(v)||![2,3].includes(v.version)||!Array.isArray(v.custom))return false;
  const seen=[];
  for(const i of v.custom){if(!i||typeof i.id!=='string'||!/^custom-[a-zA-Z0-9-]{1,80}$/.test(i.id)||seen.some(s=>s.id===i.id)||customTextError(i.label)||i.label!==i.label.trim()||knownDuplicate(seen,i.label))return false;seen.push(i)}
  return v.selected.every(id=>INTEREST_CATALOG.some(i=>i.id===id)||seen.some(i=>i.id===id));
 }
+export function validDraft(v){return validInterestDraft(v)&&v.version===3&&validFirstMilestone(v.firstMilestone)}
 export function compatibleDraft(v){
  if(validDraft(v))return structuredClone(v);
- if(v?.version===1&&baseValid(v)&&v.selected.every(id=>LEGACY_IDS.includes(id)))return {...structuredClone(v),version:2,custom:[]};
+ if(v?.version===2&&legacyStep(v)&&validInterestDraft(v))return {...structuredClone(v),version:3,firstMilestone:firstMilestoneDraft()};
+ if(v?.version===1&&legacyStep(v)&&baseValid(v)&&v.selected.every(id=>LEGACY_IDS.includes(id)))return {...structuredClone(v),version:3,custom:[],firstMilestone:firstMilestoneDraft()};
  return null;
 }
 const allIds=draft=>[...INTEREST_CATALOG,...draft.custom].map(i=>i.id);
@@ -42,7 +46,7 @@ export function draftOptions(draft){return [...INTEREST_CATALOG,...draft.custom.
 // Web candidate rule only. No category/confidence inference, normal app writes or native contract change.
 export function draftInterests(draft){return draftOptions(draft).filter(i=>draft.selected.includes(i.id)).map(i=>({...i,affinity:'curious',note:''}))}
 export function draftIdentity(draft,language='es'){return draft.name.trim()||(language==='en'?'You':'Tú')}
-export function meaningfulDraft(draft){return !!draft.name.trim()||draft.selected.length>0||draft.custom.length>0}
+export function meaningfulDraft(draft){return !!draft.name.trim()||draft.selected.length>0||draft.custom.length>0||firstMilestoneMeaningful(draft.firstMilestone)}
 export function createOnboardingStore(storage){
  let memory;
  return {

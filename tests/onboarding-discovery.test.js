@@ -47,12 +47,12 @@ test('multiple custom identities survive deselect, reselect and reload; explicit
 });
 test('V1 sessions retain every selection, name and step through explicit nonmutating compatibility',()=>{
  const s=storage(),v1={version:1,name:'旧い名前',selected:[...LEGACY_IDS].reverse(),step:'universe'},raw=JSON.stringify(v1);s.data.set(ONBOARDING_KEY,raw);
- const restored=createOnboardingStore(s).read();assert.deepEqual(restored,{...v1,version:2,custom:[]});assert.equal(s.data.get(ONBOARDING_KEY),raw);assert.ok(s.calls.every(([op])=>op==='get'));
+ const restored=createOnboardingStore(s).read();assert.deepEqual(restored,{...v1,version:3,custom:[],firstMilestone:initialDraft().firstMilestone});assert.equal(s.data.get(ONBOARDING_KEY),raw);assert.ok(s.calls.every(([op])=>op==='get'));
  assert.deepEqual(draftInterests(restored).map(i=>i.id),LEGACY_IDS);assert.equal(validDraft(restored),true);
  const next=add(restored,'Fictional custom').draft;createOnboardingStore(s).save(next);assert.deepEqual(createOnboardingStore(s).read(),next);
  assert.deepEqual(v1,{version:1,name:'旧い名前',selected:[...LEGACY_IDS].reverse(),step:'universe'});assert.equal(compatibleDraft({...v1,selected:['science']}),null);
 });
-test('V2 validation rejects broken identities, missing references and duplicate labels; storage denial remains honest and isolated',()=>{
+test('current draft validation rejects broken identities, missing references and duplicate labels; storage denial remains honest and isolated',()=>{
  const d=add(initialDraft(),'Text','custom-one').draft;
  for(const invalid of [{...d,custom:null},{...d,selected:['custom-missing']},{...d,custom:[{id:'custom-one',label:' Text'}]},{...d,custom:[...d.custom,{id:'custom-two',label:'TEXT'}]},{...d,custom:[{id:'custom-one',label:'Photography'}]},{...d,custom:[...d.custom,d.custom[0]]},{...d,selected:['custom-one','custom-one']}])assert.equal(validDraft(invalid),false);
  const s=storage(),keys=['profile','universe','projects','settings'];keys.forEach(k=>s.data.set(k,`sentinel:${k}`));const before=new Map(s.data),store=createOnboardingStore(s);store.save(d);store.clear();assert.deepEqual(s.data,before);assert.ok(s.calls.every(c=>c[1]===ONBOARDING_KEY));
