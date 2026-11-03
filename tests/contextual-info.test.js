@@ -1,6 +1,6 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
-import {contextualInfoPosition,observeInfoPopover} from '../src/contextual-info.js';
+import {contextualInfoPosition,protectedInfoPosition,rectanglesOverlap,observeInfoPopover,observeInlineInfo} from '../src/contextual-info.js';
 
 test('info panels stay within mobile, desktop, zoomed and offset visual viewports',()=>{
  for(const width of [320,375,390,428,768,1440])for(const height of [180,320,600,844])for(const scale of [1,1.5,2]){
@@ -53,4 +53,51 @@ test('Escape closes only the information surface before an outer dialog or accou
  const event=new Event('keydown',{cancelable:true});Object.defineProperty(event,'key',{value:'Escape'});f.view.document.dispatchEvent(event);
  assert.equal(event.defaultPrevented,true);assert.deepEqual(f.states,[true,false]);assert.equal(f.view.document.activeElement,f.trigger);
  f.dispose();
+});
+
+test('Welcome visual regression: measured 390px primary CTA stays fully clear of open help',()=>{
+ // Actual a3aa9c3 rendered rectangles (390x844, ES Light/Dark). The old
+ // panel at y=470.453125 intersected the primary action at y=514.453125.
+ const action={left:16,right:193.9453125,top:514.453125,bottom:562.453125};
+ const anchor={left:204,top:418.453125,bottom:462.453125};
+ const viewport={left:0,top:0,width:390,height:844},height=164.78125;
+ const old=contextualInfoPosition(anchor,viewport,height);
+ assert.equal(rectanglesOverlap({...old,right:old.left+old.width,bottom:old.top+height},action),true);
+ const next=protectedInfoPosition(anchor,viewport,height,action);
+ assert.ok(next);assert.equal(next.top+height,anchor.top-8);
+ assert.equal(rectanglesOverlap({...next,right:next.left+next.width,bottom:next.top+height},action),false);
+});
+test('Welcome chooses document-flow help when enlarged content cannot fit without covering the action',()=>{
+ const action={left:16,right:250,top:450,bottom:510},anchor={left:270,top:360,bottom:404};
+ assert.equal(protectedInfoPosition(anchor,{left:0,top:0,width:320,height:480},430,action),null);
+ assert.equal(protectedInfoPosition(anchor,{left:0,top:0,width:390,height:844},600,action),null);
+});
+test('protected floating placement never intersects an action or leaves the visual viewport',()=>{
+ for(const width of [320,375,390,428])for(const height of [360,480,600,844])for(const textHeight of [165,300,525]){
+  const viewport={left:0,top:30,width,height},anchor={left:width-64,top:height/2,bottom:height/2+44};
+  const action={left:16,right:width-16,top:anchor.bottom+52,bottom:anchor.bottom+100},p=protectedInfoPosition(anchor,viewport,textHeight,action);
+  if(p){assert.ok(p.top>=42);assert.ok(p.top+textHeight<=30+height-12);assert.equal(rectanglesOverlap({...p,right:p.left+p.width,bottom:p.top+textHeight},action),false)}
+ }
+});
+test('inline help keeps Escape/outside dismissal local and removes its listeners on close',()=>{
+ const doc=Object.assign(new EventTarget(),{querySelector:()=>null,querySelectorAll:()=>[]}),view={document:doc};
+ const target={},trigger={contains:x=>x===target},panel={contains:()=>false},closed=[];
+ const dispose=observeInlineInfo(panel,trigger,view,restore=>closed.push(restore));
+ const inside=new Event('click');Object.defineProperty(inside,'target',{value:target});doc.dispatchEvent(inside);assert.deepEqual(closed,[]);
+ const escape=new Event('keydown',{cancelable:true});Object.defineProperty(escape,'key',{value:'Escape'});doc.dispatchEvent(escape);assert.equal(escape.defaultPrevented,true);assert.deepEqual(closed,[true]);
+ const otherControl=new Event('click');Object.defineProperty(otherControl,'target',{value:{closest:()=>({})}});doc.dispatchEvent(otherControl);assert.deepEqual(closed,[true,false]);
+ doc.dispatchEvent(new Event('click'));assert.deepEqual(closed,[true,false,true]);dispose();doc.dispatchEvent(new Event('click'));assert.deepEqual(closed,[true,false,true]);
+});
+test('inline help never captures Escape intended for a native modal above it',()=>{
+ const doc=Object.assign(new EventTarget(),{querySelector:()=>({contains:()=>false}),querySelectorAll:()=>[]}),closed=[];
+ const dispose=observeInlineInfo({contains:()=>false},{contains:()=>false},{document:doc},restore=>closed.push(restore));
+ const escape=new Event('keydown',{cancelable:true});Object.defineProperty(escape,'key',{value:'Escape'});doc.dispatchEvent(escape);
+ assert.equal(escape.defaultPrevented,false);assert.deepEqual(closed,[false]);dispose();
+});
+test('a queued native resize callback cannot reposition or reopen help after close or inline handoff',()=>{
+ const f=fixture();let queued;
+ f.view.ResizeObserver=class{constructor(callback){queued=callback}observe(){}disconnect(){}};
+ f.toggle(true);assert.equal(typeof queued,'function');f.toggle(false);
+ const before={...f.panel.style};f.viewport.width=280;queued();assert.deepEqual(f.panel.style,before);
+ f.dispose();f.panel.open=true;queued();assert.deepEqual(f.panel.style,before);assert.deepEqual(f.states,[true,false]);
 });
