@@ -74,3 +74,16 @@ test('Badges and Featured retain their route through Miles, reload, Back and For
  }
  assert.equal(backgroundRoute('you/badges/manage'),'home');
 });
+test('dirty modal editors protect route/history departure and block a second Miles modal until explicit discard',()=>{
+ const b=browser('home'),views=[];let dirty=false,pending,requests=0;
+ const guard={blockMiles:true,isDirty:()=>dirty,request:a=>{pending=a;requests++}},nav=createMilesNavigation(b.win,v=>views.push(v),a=>a(),()=>guard);
+ b.hash('project/japan');dirty=true;b.win.history.back();assert.equal(b.win.location.hash,'#project/japan');assert.equal(requests,1);
+ b.hash('miles');assert.equal(b.win.location.hash,'#project/japan');assert.equal(requests,2);assert.equal(views.at(-1).open,false);
+ dirty=false;pending();assert.equal(b.win.location.hash,'#miles');assert.equal(views.at(-1).open,true);nav.close();assert.equal(views.at(-1).route,'project/japan');nav.destroy();
+});
+test('clean modal navigation closes the editor without discard, history rollback or an overlapping Miles surface',()=>{
+ const b=browser('home'),views=[];let closed=0,requested=0;
+ const guard={blockMiles:true,isDirty:()=>false,leave:()=>closed++,request:()=>requested++},nav=createMilesNavigation(b.win,v=>views.push(v),a=>a(),()=>guard);
+ b.hash('miles');assert.equal(closed,1);assert.equal(requested,0);assert.equal(views.at(-1).open,true);assert.equal(b.stack.length,2);
+ nav.close();assert.equal(views.at(-1).route,'home');nav.destroy();
+});

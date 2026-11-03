@@ -384,3 +384,8 @@ dialog>h3 { margin-top: 20px; }
 @media(forced-colors:active) {
  .home-simplified .miles-insight { border-color: CanvasText; background: Canvas; }
 }
+
+/* Context focus is quieter than interactive keyboard focus. No control ring is removed. */
+#main h1[tabindex="-1"]:focus{outline:none;text-decoration:underline;text-decoration-color:var(--border);text-decoration-thickness:1px;text-underline-offset:.2em}
+.you-settings .miles-mode-title{font-size:var(--text-headline);line-height:1.3}
+.dialog-recovery{padding:12px 0}.dialog-recovery h3{font-size:1rem;margin:0 0 10px}.dialog-recovery p{font-size:.875rem;line-height:1.6}

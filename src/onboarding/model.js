@@ -52,6 +52,6 @@ export function createOnboardingStore(storage){
  return {
   read(){if(memory)return structuredClone(memory);try{const value=compatibleDraft(JSON.parse(storage.getItem(ONBOARDING_KEY)));if(value)return value}catch{}return initialDraft()},
   save(value){if(!validDraft(value))return {ok:false,persisted:false};memory=structuredClone(value);try{storage.setItem(ONBOARDING_KEY,JSON.stringify(value));return {ok:true,persisted:true}}catch{return {ok:true,persisted:false}}},
-  clear(){memory=initialDraft();try{storage.removeItem(ONBOARDING_KEY);return true}catch{return false}}
+  clear(){try{storage.removeItem(ONBOARDING_KEY);memory=initialDraft();return true}catch{return false}}
  };
 }

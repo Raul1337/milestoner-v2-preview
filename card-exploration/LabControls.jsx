@@ -3,17 +3,16 @@ import {useLanguage} from '../src/language';
 import tokenCSS from '../src/tokens.css?raw';
 export const cardLabEnabled=import.meta.env.VITE_PROJECT_CARD_LAB==='true';
 export const currentHomeEnabled=cardLabEnabled||import.meta.env.VITE_CURRENT_HOME==='true';
-const roots=[...tokenCSS.matchAll(/:root\s*\{([^}]+)\}/g)];
-const parse=text=>Object.fromEntries([...text.matchAll(/(--[\w-]+):\s*([^;]+);/g)].map(m=>[m[1],m[2]]));
-const light=parse(roots[0][1]),dark={...light,...parse(roots[1][1])};
+import {appearanceTokens} from '../src/onboarding/appearance';
 export function useCardLab() {
  const [view,setView]=useState(()=>new URLSearchParams(location.search).get('view')==='previous'?'previous':'refined'),[scenario,setScenario]=useState('normal'),[appearance,setAppearance]=useState(()=>new URLSearchParams(location.search).get('appearance')==='light'?'light':'dark');
  useEffect(()=>{
   if(!cardLabEnabled&&!(currentHomeEnabled&&['light','dark'].includes(new URLSearchParams(location.search).get('appearance'))))return;
-  Object.entries(appearance==='dark'?dark:light).forEach(([key,value])=>document.documentElement.style.setProperty(key,value));
+  const contrast=matchMedia('(prefers-contrast: more)');
+  const apply=()=>Object.entries(appearanceTokens(tokenCSS,appearance==='dark',contrast.matches)).forEach(([key,value])=>document.documentElement.style.setProperty(key,value));apply();contrast.addEventListener('change',apply);
   document.documentElement.style.colorScheme=appearance;
   const artwork=()=>document.querySelectorAll('picture source').forEach(s=>s.media=appearance==='dark'?'all':'not all');
-  artwork();const observer=new MutationObserver(artwork);observer.observe(document.getElementById('root'),{childList:true,subtree:true});return()=>observer.disconnect();
+  artwork();const observer=new MutationObserver(artwork);observer.observe(document.getElementById('root'),{childList:true,subtree:true});return()=>{observer.disconnect();contrast.removeEventListener('change',apply)};
  },[appearance]);
  return {view,setView,scenario,setScenario,appearance,setAppearance};
 }

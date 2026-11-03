@@ -14,9 +14,11 @@ export function createMilesNavigation(win,onChange,requestDiscard,profileGuard=(
   const next=navigationView(win.location,win.history);
   if(next.open&&!view.open&&!win.history.state?.[MILES_ENTRY]){next.route=backgroundRoute(view.route);win.history.replaceState({...win.history.state,[MILES_ENTRY]:{background:next.route}},'',url('miles'))}
   if(view.open&&!next.open&&!closing){push();requestDiscard(()=>close());return}
-  // Protect only the dedicated Profile editor. Miles may open over its intact draft.
+  // One active editor guard. Profile permits Miles over its intact draft;
+  // modal editors prevent a second modal and protect route departures.
   const guard=profileGuard();
-  if(!view.open&&view.route==='you/profile/edit'&&next.route!==view.route&&guard?.isDirty()){
+  if(!view.open&&guard?.blockMiles&&(next.route!==view.route||next.open)&&!guard.isDirty())guard.leave?.();
+  if(!view.open&&(view.route==='you/profile/edit'||guard?.blockMiles)&&(next.route!==view.route||next.open&&guard?.blockMiles)&&guard?.isDirty()){
    const destination=win.location.hash.slice(1),destinationState=win.history.state;
    win.history.pushState(null,'',url(view.route));
    guard.request(()=>{win.history.pushState(destinationState,'',url(destination));publish(next)});
