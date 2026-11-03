@@ -32,3 +32,14 @@ test('readable Universe retains full multilingual/custom labels, all affinity va
  }
  assert.equal(JSON.stringify(original),snapshot);
 });
+
+test('public review applies changed text immediately even when the iframe URL does not navigate or fire load',async()=>{
+ const {readFile}=await import('node:fs/promises'),{runInNewContext}=await import('node:vm');
+ const html=await readFile('public/review/universe.html','utf8'),script=html.match(/<script>([\s\S]*?)<\/script>/)[1];
+ const root={style:{}},controls={},frame={style:{},src:'',contentWindow:{innerWidth:320},contentDocument:{documentElement:root,getElementById:id=>id==='root'?{}:null},addEventListener(){}};
+ for(const [id,values] of Object.entries({text:['100','150','200'],lang:['es','en'],appearance:['dark','light'],width:['320','390'],view:['you','you/expanded']}))controls[id]={options:values.map(value=>({value})),value:values[0],handlers:{},addEventListener(n,fn){this.handlers[n]=fn}};
+ controls.measurement={textContent:''};
+ runInNewContext(script,{URL,URLSearchParams,location:{search:'?text=200',href:'https://example.test/review/universe.html'},history:{replaceState(){}},document:{querySelector:()=>frame,getElementById:id=>controls[id]}});
+ assert.equal(root.style.fontSize,'200%');const first=frame.src;
+ for(const value of ['100','150','200']){controls.text.value=value;controls.text.handlers.change();assert.equal(frame.src,first);assert.equal(root.style.fontSize,value+'%');assert.match(controls.measurement.textContent,new RegExp(value+'%'))}
+});

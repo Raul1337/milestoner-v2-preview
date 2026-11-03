@@ -5,7 +5,7 @@
 <script>
 const q=new URLSearchParams(location.search),ids=['text','lang','appearance','width','view'],frame=document.querySelector('iframe');
 for(const id of ids){const el=document.getElementById(id),value=q.get(id);if([...el.options].some(o=>o.value===value))el.value=value;else if(id==='text')el.value='200';}
-function apply(){const params=new URLSearchParams();for(const id of ids)params.set(id,document.getElementById(id).value);history.replaceState(null,'','?'+params);frame.style.width=params.get('width')+'px';frame.src='../?lang='+params.get('lang')+'&appearance='+params.get('appearance')+'#'+params.get('view');}
-frame.addEventListener('load',()=>{frame.contentDocument.documentElement.style.fontSize=document.getElementById('text').value+'%';document.getElementById('measurement').textContent='Viewport: '+frame.contentWindow.innerWidth+'px · texto: '+document.getElementById('text').value+'%';});
+function apply(){const params=new URLSearchParams();for(const id of ids)params.set(id,document.getElementById(id).value);history.replaceState(null,'','?'+params);frame.style.width=params.get('width')+'px';const target=new URL('../?lang='+params.get('lang')+'&appearance='+params.get('appearance')+'#'+params.get('view'),location.href).href;if(frame.src!==target)frame.src=target;scaleFrame();}
+function scaleFrame(){const doc=frame.contentDocument;if(!doc?.getElementById('root'))return;doc.documentElement.style.fontSize=document.getElementById('text').value+'%';document.getElementById('measurement').textContent='Viewport: '+frame.contentWindow.innerWidth+'px · texto: '+document.getElementById('text').value+'%';}frame.addEventListener('load',scaleFrame);
 for(const id of ids)document.getElementById(id).addEventListener('change',apply);apply();
 </script></html>
